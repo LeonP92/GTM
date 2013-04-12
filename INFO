@@ -1,0 +1,5 @@
+title: Text-Based Grand Theft Auto
+contributors: pho martin awesome
+type: game
+repo: ece2524.ece.vt.edu:gcs278/project.gi
+description: Grand theft auto texted based adventure game. May implement graphics using pygame module. Will consist of a map and different object one may encounter such as police, citizens and stores.
