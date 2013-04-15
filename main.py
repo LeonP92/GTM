@@ -3,9 +3,12 @@
 import game, errors
 
 def main():
+	userChoice = ""
 	while True: 
-		userChoice = ""
-		game.userMove(userChoice)
+		userChoice = game.usermove(userChoice)
+		if userChoice == 'q':
+			break
+	print("Thanks for playing!")
 
 if __name__ == "__main__":
 	main()

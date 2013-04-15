@@ -1,8 +1,8 @@
 import sys, errors
 
-possibleChoice = ('A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e')
+possibleChoice = ('A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'Q', 'q')
 
-def userMove(userChoice):
+def usermove(userChoice):
 	possible = 0
 	print("Test input")
 	userChoice=raw_input("Choose your option: \n")
@@ -11,10 +11,11 @@ def userMove(userChoice):
 		if possible == 0: 
 			if choice == userChoice:
 				possible = 1;
-			else: #do nothing
-				break
+		else:
+			break
 	if possible == 1:
-		print("Action will do this")
+		userChoice = userChoice.lower()
 		return userChoice
 	else:
 		errors.badChoice()
+	
