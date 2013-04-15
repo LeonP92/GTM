@@ -1,6 +1,6 @@
 import sys, errors
 
-possibleChoice = ('A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e')
+possibleChoice = ('A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'quit')
 
 def userMove(userChoice):
 	possible = 0
@@ -15,6 +15,5 @@ def userMove(userChoice):
 				break
 	if possible == 1:
 		print("Action will do this")
-		return userChoice
 	else:
 		errors.badChoice()
