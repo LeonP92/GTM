@@ -4,9 +4,10 @@ import game, errors
 
 def main():
 	userChoice = ""
-	game.greetings()
-	while True: 
-		userChoice = game.usermove(userChoice)
+	gameOn = 0
+	gameOn = game.greetings()
+	while gameOn==0: 
+		userChoice = game.usermove()
 		if userChoice == 'q':
 			break
 	print("Thanks for playing!")
