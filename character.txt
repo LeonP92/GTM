@@ -1,0 +1,6 @@
+Name: Javier
+Level: 1
+Health: 100
+Money: 0
+Items: none
+Mission: 0
