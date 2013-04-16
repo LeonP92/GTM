@@ -4,6 +4,7 @@ import game, errors
 
 def main():
 	userChoice = ""
+	game.greetings()
 	while True: 
 		userChoice = game.usermove(userChoice)
 		if userChoice == 'q':
