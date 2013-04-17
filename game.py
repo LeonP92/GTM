@@ -138,5 +138,4 @@ def parse(getItem):
 	file = open("character.txt","r")
 	for i, line in enumerate(file):
 		if re.match(getItem,line):
-			print(re.match(r'^[\ ][.+]$',line))
-
+			print(line.replace(getItem+": ",""))
