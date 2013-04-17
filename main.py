@@ -1,9 +1,11 @@
 #!/usr/bin/env python2
 
-import game, errors
+import game, errors, time
 def main():
 	userChoice = ""
 	gameOn = 0
+	game.parse('Money')
+	time.sleep(2)
 	gameOn = game.greetings()
 	while gameOn==0: 
 		userChoice = game.usermove("Fight Stranger", "Rob Stranger", "Rest", "Shop", "Cry")

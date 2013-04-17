@@ -1,7 +1,9 @@
-import sys, errors, time, os, fileinput
+import sys, errors, time, os, fileinput, re
 
 possibleChoice = ('A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'Q', 'q') #used for basic choices
 items = ('baseball bat', 'baseball', 'bat', 'knife', 'bow', 'pistol', 'rifle') #Used for shop info
+fighters = ('Tyrone','Pedro','Bob','Hilter','Martin','Hobo') #Fighter's names
+
 #Description: This will display the original display/ introduction screen for the GTA game
 #Inputs: None
 #Outputs: Greetings
@@ -125,3 +127,16 @@ def showshop():
 	print data
 	f.close()
 	item = raw_input("What do you need from me?? [Hint: Type in what you want, you can also type 'steal [item name]' but be prepared to fight the shop keeper!\n")
+
+#Description: Function for the fight scene
+def fight(environment):
+	if environment == store:
+		figther = 'Clerk'
+
+#Description: Gets the money from text file
+def parse(getItem):	
+	file = open("character.txt","r")
+	for i, line in enumerate(file):
+		if re.match(getItem,line):
+			print(re.match(r'^[\ ][.+]$',line))
+
