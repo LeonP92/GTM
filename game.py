@@ -2,6 +2,7 @@ import sys, errors, time, os, fileinput
 
 possibleChoice = ('A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'Q', 'q') #used for basic choices
 items = ('baseball bat', 'baseball', 'bat', 'knife', 'bow', 'pistol', 'rifle') #Used for shop info
+
 #Description: This will display the original display/ introduction screen for the GTA game
 #Inputs: None
 #Outputs: Greetings
@@ -9,23 +10,9 @@ def greetings():
 	toReturn = 0 #return var
 	#Greeting part
 	os.system('clear')
-	print("********************************************************")
-	time.sleep(1) #sleeps for 1 seconds
-	print("*    _________       ____________     _____________    *")
-	time.sleep(1) 
-	print("*    |                    |           |     |     |    *")
-	time.sleep(1) 
-	print("*    |     ___            |           |     |     |    *")
-	time.sleep(1)
-	print("*    |       |            |           |     |     |    *")
-	time.sleep(1) 
-	print("*    |_______|            |           |     |     |    *")
-	time.sleep(1) 
-	print("*                                                      *")
-	time.sleep(1) 
-	print("********************************************************")
-	time.sleep(3)
-	os.system('clear')
+	for line in open("Greeting.txt", "r"): #output lines
+		sys.stdout.write(line) #print line
+		time.sleep(.5)#sleep for 1 second
 	toReturn = initopts()
 	return toReturn
 #Description: Initial options allows user to choose if they would like to start a new game or continue
@@ -33,15 +20,14 @@ def initopts():
 	toReturn = 0
 	print("		Welcome to Grand Theft Manual!		")
 	print("1) Start a new game \n2) Continue \n3) Help \n4) Quit ")
-	userinput = input("Please choose one of the options by pressing 1, 2, 3, or 4...\n")
-	
-	if userinput == 1: 
+	userinput = raw_input("Please choose one of the options by pressing 1, 2, 3, or 4...\n")
+	if userinput == '1': 
 		newgame()
-	elif userinput == 2:
+	elif userinput == '2':
 		continuegame()
-	elif userinput == 3: 
+	elif userinput == '3': 
 		displayhelp()
-	elif userinput == 4:
+	elif userinput == '4':
 		toReturn = 1
 	else: 
 		print("Your input was incorrect! Please try again!")
@@ -119,9 +105,19 @@ def usermove(optA, optB, optC, optD, optE):
 		errors.badChoice()
 #Description: This will be show the items in the shop
 def showshop():
+	possible = 0
 	f = open("items.txt", "r")
 	data = f.read()
 	print("\nWelcome to the weapon shop! BETTER NOT STEAL ANYTHING...")
 	print data
 	f.close()
 	item = raw_input("What do you need from me?? [Hint: Type in what you want, you can also type 'steal [item name]' but be prepared to fight the shop keeper!\n")
+	for choice in items:
+		if possible == 0:
+			possible = 1;
+		else:
+			break
+	if possible == 1:
+		shopcheck(item)
+	else: 
+		errors.badChoice()
