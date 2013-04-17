@@ -11,8 +11,8 @@ fighters = ('Louie','Bob','Darren','Big Boy Bruno','Tyrone','Pedro','Hilter','Ma
 def greetings():
 	toReturn = 0 #return var
 	#Greeting part
-	os.system("clear")
 	sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=40, cols=150))
+	os.system("clear")
 	for line in open("Greeting.txt", "r"): #output lines
 		sys.stdout.write(line) #print line
 		time.sleep(.5)#sleep for 0.5 second
@@ -183,7 +183,7 @@ def fight(environment):
 		print("You lost")
 	else:
 		print("You won!")		
-#Description:
+#Description: Returns items user have
 def getitems():
 	file = open("character.txt","r")
 	for i, line in enumerate(file):
