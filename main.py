@@ -4,6 +4,7 @@ import game, errors, time
 
 def main():
 	userChoice = ""
+	game.fight("street")
 	gameOn = 0
 	gameOn = game.greetings()
 	while gameOn==0: 
