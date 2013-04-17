@@ -1,8 +1,9 @@
-import sys, errors, time, os, fileinput, re
+import sys, errors, time, os, fileinput, re, random
 
 possibleChoice = ('A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'Q', 'q') #used for basic choices
-items = ('baseball bat', 'baseball', 'bat', 'knife', 'bow', 'pistol', 'rifle') #Used for shop info
-fighters = ('Tyrone','Pedro','Bob','Hilter','Martin','Hobo') #Fighter's names
+items = ('baseball bat', 'baseball', 'bat', 'knife', 'bow', 'pistol', 'rifle', 'steal baseball bat', 'steal baseball', 'steal bat', 'steal knife', 'steal bow', 'steal pistol', 'steal rifle') #Used for shop info
+fighters = ('Louie','Bob','Darren','Big Boy Bruno','Tyrone','Pedro','Hilter','Martin','Hobo Martin','Fat Joe',\
+'Oscar','Alfonso','Swollen Lou','Butter Knife Pietro','Busted Kneecaps Fabrizio','Petty Crime Salvatore') #Fighter's names
 
 #Description: This will display the original display/ introduction screen for the GTA game
 #Inputs: None
@@ -10,10 +11,11 @@ fighters = ('Tyrone','Pedro','Bob','Hilter','Martin','Hobo') #Fighter's names
 def greetings():
 	toReturn = 0 #return var
 	#Greeting part
-	os.system('clear')
+	os.system("clear")
+	sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=40, cols=150))
 	for line in open("Greeting.txt", "r"): #output lines
 		sys.stdout.write(line) #print line
-		time.sleep(.5)#sleep for 1 second
+		time.sleep(.5)#sleep for 0.5 second
 	time.sleep(3)
 	toReturn = initopts()
 	return toReturn
@@ -37,7 +39,7 @@ def initopts():
 	return toReturn
 #Description: This will allow users to create a new game, if there is already a saved game then the user can choose to overwrite the current game or continue
 def newgame():
-	os.system('clear')
+	os.system("clear")
 	fileExists = errors.filecheck('character.txt')
 	if fileExists == 0:
 		choice = raw_input("A file already exists, would you like to overwrite the current game?\nPress Y for yes and anything else for no: ").lower()
@@ -55,16 +57,18 @@ def newgame():
 		file.close()
 #Description: This will continue a game  if one is already saved if not it will return the user to the main menu
 def continuegame():
-	os.system('clear')
+	os.system("clear")
 	fileExists = errors.filecheck('character.txt')
 	if fileExists == 0:
-		print("Resuming saved game")
+		print("Resuming saved game...")
+		time.sleep(1)
+		print("Welcome back " + parse("Name"))
 	else:
 		print("There is no saved game, please choose another option \n")
 		initopts()
 #Description: This will display the Help file
 def displayhelp():
-	os.system('clear')
+	os.system("clear")
 	f = open("HELP.txt", "r")#opens up help text
 	data = f.read() #Reads the entire file
 	print data #displays the data
@@ -74,7 +78,7 @@ def displayhelp():
 #Description: This is when user name and such will be recorded
 def intro(file): 
 	#waking up
-	os.system('clear')
+	os.system("clear")
 	print(".....")
 	time.sleep(2)
 	print(".... Ugh... My head hurts... Where am I?")
@@ -90,9 +94,12 @@ def intro(file):
 	#Writes in character file
 	file.write("Name: "+ username +"\nLevel: 1\nHealth: 100\nMoney: 0\nItems: none\nMission: 0")	
 #Description this will be the basic user move, when they are not in the missions or fights
-def usermove(optA, optB, optC, optD, optE):
+def usermove(optionList):
 	possible = 0
-	userChoice=raw_input("Choose your option:\nA) " + optA + "\nB) "+ optB + "\nC) "+ optC + "\nD) "+ optD + "\nE) "+ optE +"\nQ) Quit\n")
+	i = 0 #temporary variable
+	for items in optionList:
+			print(items)
+	userChoice=raw_input("Choose your option [Hit Q to quit]: ")
 	
 	for choice in possibleChoice:
 		if possible == 0: 
@@ -106,22 +113,53 @@ def usermove(optA, optB, optC, optD, optE):
 	else:
 		errors.badChoice()
 #Description: This will be show the items in the shop
-def showshop():
+def showshop(toShow):
 	possible = 0
-	f = open("items.txt", "r")
-	data = f.read()
-	print("\nWelcome to the weapon shop! BETTER NOT STEAL ANYTHING...")
-	print data
-	f.close()
-	item = raw_input("What do you need from me?? [Hint: Type in what you want, you can also type 'steal [item name]' but be prepared to fight the shop keeper!\n")
+	if toShow==0:
+		f = open("items.txt", "r")
+		data = f.read()
+		print("\nWelcome to the weapon shop! BETTER NOT STEAL ANYTHING...")
+		print data
+		f.close()
+	userinput = raw_input("What do you need from me?? [Hint: Type in what you want, you can also type 'steal [item name]' but be prepared to fight the shop keeper! Also hit Q to quit]\n")
+	for item in items:
+		if userinput == item:
+			print("Can I do anything else for ya?")
+			possible = 1;
+			break
+			
+		elif userinput.lower() == "q" and possible != 1:
+			print("Alright... come again soon!")
+			possible = 1;
+			break
+		else:
+			break
+	if possible == 0:
+		print("What was that? I couldn't understand you.... Try again or leave...")
+	if userinput.lower() != "q":
+		showshop(1)
 #Description: Function for the fight scene
 def fight(environment):
-	if environment == store:
-		figther = 'Clerk'
-
+	if environment == "store":
+		fighter = "Clerk"
+	elif environment == "street":
+		fighter = fighters[random.randrange(len(fighters))]
+	elif environment == "bank":
+		fighter = "Cop"
+	elif environment == "stranger":
+		fighter = "Stranger"
+	health = int(parse("Level"))*random.randrange(20,100)
+	getitems()
+#Description:
+def getitems():
+	file = open("character.txt","r")
+	for i, line in enumerate(file):
+		if re.match("Items:",line):
+			line.replace("Items: ","")
+			return line.split(",")
 #Description: Gets the money from text file
 def parse(getItem):	
 	file = open("character.txt","r")
 	for i, line in enumerate(file):
 		if re.match(getItem,line):
-			print(line.replace(getItem+": ",""))
+			return line.replace(getItem+": ","")
