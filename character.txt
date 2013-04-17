@@ -3,4 +3,14 @@ Level: 1
 Health: 100
 Money: 0
 Items: none
+Mission: 0Name: Martin
+Level: 1
+Health: 100
+Money: 0
+Items: none
+Mission: 0Name: Miguel
+Level: 1
+Health: 100
+Money: 0
+Items: none
 Mission: 0

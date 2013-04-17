@@ -121,9 +121,10 @@ def usermove(optA, optB, optC, optD, optE):
 def showshop():
 	f = open("items.txt", "r")
 	data = f.read()
+	print("\nWelcome to the weapon shop! BETTER NOT STEAL ANYTHING...")
 	print data
 	f.close()
-	raw_input("Testing click anything to quit out")
+	item = raw_input("What do you need from me?? [Hint: Type in what you want, you can also type 'steal [item name]' but be prepared to fight the shop keeper!\n")
 
 
 	
