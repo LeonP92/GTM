@@ -1,7 +1,7 @@
 import sys, errors, time, os, fileinput
 
-possibleChoice = ('A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'Q', 'q')
-
+possibleChoice = ('A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'Q', 'q') #used for basic choices
+items = ('baseball bat', 'baseball', 'bat', 'knife', 'bow', 'pistol', 'rifle') #Used for shop info
 #Description: This will display the original display/ introduction screen for the GTA game
 #Inputs: None
 #Outputs: Greetings
@@ -54,13 +54,17 @@ def newgame():
 	if fileExists == 0:
 		choice = raw_input("A file already exists, would you like to overwrite the current game?\nPress Y for yes and anything else for no: ").lower()
 		if choice == "y":
-			print ("Yes")
+			file = open("character.txt","w")
+			file = open("character.txt", "a+")
+			intro(file)
+			file.close()
 		else:
 			print("\n")
 			initopts()
 	else:
 		file = open("character.txt", "a+")
 		intro(file)
+		file.close()
 #Description: This will continue a game  if one is already saved if not it will return the user to the main menu
 def continuegame():
 	os.system('clear')
@@ -98,11 +102,9 @@ def intro(file):
 	#Writes in character file
 	file.write("Name: "+ username +"\nLevel: 1\nHealth: 100\nMoney: 0\nItems: none\nMission: 0")	
 #Description this will be the basic user move, when they are not in the missions or fights
-def usermove():
+def usermove(optA, optB, optC, optD, optE):
 	possible = 0
-	print("Test input")
-	userChoice=raw_input("Choose your option: \n")
-	print(userChoice)
+	userChoice=raw_input("Choose your option:\nA) " + optA + "\nB) "+ optB + "\nC) "+ optC + "\nD) "+ optD + "\nE) "+ optE +"\nQ) Quit\n")
 	
 	for choice in possibleChoice:
 		if possible == 0: 
@@ -115,4 +117,11 @@ def usermove():
 		return userChoice
 	else:
 		errors.badChoice()
-	
+#Description: This will be show the items in the shop
+def showshop():
+	f = open("items.txt", "r")
+	data = f.read()
+	print("\nWelcome to the weapon shop! BETTER NOT STEAL ANYTHING...")
+	print data
+	f.close()
+	item = raw_input("What do you need from me?? [Hint: Type in what you want, you can also type 'steal [item name]' but be prepared to fight the shop keeper!\n")
