@@ -98,7 +98,7 @@ def usermove(optionList):
 	possible = 0
 	i = 0 #temporary variable
 	for items in optionList:
-			print(items)
+		print(items)
 	userChoice=raw_input("Choose your option [Hit Q to quit]: ")
 	
 	for choice in possibleChoice:
@@ -121,23 +121,24 @@ def showshop(toShow):
 		print("\nWelcome to the weapon shop! BETTER NOT STEAL ANYTHING...")
 		print data
 		f.close()
-	userinput = raw_input("What do you need from me?? [Hint: Type in what you want, you can also type 'steal [item name]' but be prepared to fight the shop keeper! Also hit Q to quit]\n")
+	userinput = raw_input("What do you need from me?? [Hint: Type in what you want, you can also type 'steal [item name]' but be prepared to fight the shop keeper! Also hit Q to quit]\n").lower()
 	for item in items:
-		if userinput == item:
-			print("Can I do anything else for ya?")
-			possible = 1;
-			break
-			
-		elif userinput.lower() == "q" and possible != 1:
-			print("Alright... come again soon!")
-			possible = 1;
-			break
+		if possible == 0:
+			if userinput == item:
+				possible = 1
+			elif userinput == "q":
+				possible = 2
 		else:
-			break
+			break;
 	if possible == 0:
 		print("What was that? I couldn't understand you.... Try again or leave...")
-	if userinput.lower() != "q":
 		showshop(1)
+	elif possible != 2:
+		print("Can I do anything else for ya?")
+		showshop(1)
+	else:
+		print("Alright... come again soon!")
+		
 #Description: Function for the fight scene
 def fight(environment):
 	# Determine fighter

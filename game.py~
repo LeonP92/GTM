@@ -11,7 +11,7 @@ fighters = ('Louie','Bob','Darren','Big Boy Bruno','Tyrone','Pedro','Hilter','Ma
 def greetings():
 	toReturn = 0 #return var
 	#Greeting part
-	sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=40, cols=150))
+	sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=30, cols=130))
 	os.system("clear")
 	for line in open("Greeting.txt", "r"): #output lines
 		sys.stdout.write(line) #print line
@@ -98,7 +98,7 @@ def usermove(optionList):
 	possible = 0
 	i = 0 #temporary variable
 	for items in optionList:
-			print(items)
+		print(items)
 	userChoice=raw_input("Choose your option [Hit Q to quit]: ")
 	
 	for choice in possibleChoice:
@@ -121,23 +121,23 @@ def showshop(toShow):
 		print("\nWelcome to the weapon shop! BETTER NOT STEAL ANYTHING...")
 		print data
 		f.close()
-	userinput = raw_input("What do you need from me?? [Hint: Type in what you want, you can also type 'steal [item name]' but be prepared to fight the shop keeper! Also hit Q to quit]\n")
+	userinput = raw_input("What do you need from me?? [Hint: Type in what you want, you can also type 'steal [item name]' but be prepared to fight the shop keeper! Also hit Q to quit]\n").lower()
 	for item in items:
-		if userinput == item:
-			print("Can I do anything else for ya?")
-			possible = 1;
-			break
-			
-		elif userinput.lower() == "q" and possible != 1:
-			print("Alright... come again soon!")
-			possible = 1;
-			break
+		if possible == 0:
+			if userinput == item:
+				possible = 1
+			elif userinput == "q":
+				possible = 2
 		else:
-			break
+			break;
 	if possible == 0:
 		print("What was that? I couldn't understand you.... Try again or leave...")
-	if userinput.lower() != "q":
+	elif possible != 2:
+		print("Can I do anything else for ya?")
 		showshop(1)
+	else:
+		print("Alright... come again soon!")
+		
 #Description: Function for the fight scene
 def fight(environment):
 	# Determine fighter
