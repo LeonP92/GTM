@@ -8,7 +8,7 @@ def main():
 	gameOn = 0
 	gameOn = game.greetings()
 	while gameOn==0: 
-		userChoice = game.usermove("Fight Stranger", "Rob Stranger", "Rest", "Shop", "Cry")
+		userChoice = game.usermove(["Fight Stranger", "Rob Stranger", "Rest", "Shop", "Cry"])
 		if userChoice == 'd':
 			game.showshop()
 		if userChoice == 'q':

@@ -1,6 +1,6 @@
-Name: Martin
+Name: Grant
 Level: 1
 Health: 100
 Money: 0
-Items: none
+Items: Bar,Gun,Clock,Computer
 Mission: 0

@@ -1,8 +1,9 @@
-import sys, errors, time, os, fileinput, re
+import sys, errors, time, os, fileinput, re, random
 
 possibleChoice = ('A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'Q', 'q') #used for basic choices
 items = ('baseball bat', 'baseball', 'bat', 'knife', 'bow', 'pistol', 'rifle') #Used for shop info
-fighters = ('Tyrone','Pedro','Bob','Hilter','Martin','Hobo') #Fighter's names
+fighters = ('Louie','Bob','Darren','Big Boy Bruno','Tyrone','Pedro','Hilter','Martin','Hobo Martin','Fat Joe',\
+'Oscar','Alfonso','Swollen Lou','Butter Knife Pietro','Busted Kneecaps Fabrizio','Petty Crime Salvatore') #Fighter's names
 
 #Description: This will display the original display/ introduction screen for the GTA game
 #Inputs: None
@@ -90,9 +91,10 @@ def intro(file):
 	#Writes in character file
 	file.write("Name: "+ username +"\nLevel: 1\nHealth: 100\nMoney: 0\nItems: none\nMission: 0")	
 #Description this will be the basic user move, when they are not in the missions or fights
-def usermove(optA, optB, optC, optD, optE):
+def usermove(optionList):
 	possible = 0
-	userChoice=raw_input("Choose your option:\nA) " + optA + "\nB) "+ optB + "\nC) "+ optC + "\nD) "+ optD + "\nE) "+ optE +"\nQ) Quit\n")
+	formatString = ' or '.join(optionList)		
+	userChoice=raw_input("Choose your option:\n{}".format(formatString))
 	
 	for choice in possibleChoice:
 		if possible == 0: 
@@ -117,12 +119,26 @@ def showshop():
 
 #Description: Function for the fight scene
 def fight(environment):
-	if environment == store:
-		figther = 'Clerk'
-
+	if environment == "store":
+		fighter = "Clerk"
+	elif environment == "street":
+		fighter = fighters[random.randrange(len(fighters))]
+	elif environment == "bank":
+		fighter = "Cop"
+	elif environment == "stranger":
+		fighter = "Stranger"
+	health = int(parse("Level"))*random.randrange(20,100)
+	getitems()
+#Description:
+def getitems():
+	file = open("character.txt","r")
+	for i, line in enumerate(file):
+		if re.match("Items:",line):
+			line.replace("Items: ","")
+			return line.split(",")
 #Description: Gets the money from text file
 def parse(getItem):	
 	file = open("character.txt","r")
 	for i, line in enumerate(file):
 		if re.match(getItem,line):
-			print(line.replace(getItem+": ",""))
+			return line.replace(getItem+": ","")
