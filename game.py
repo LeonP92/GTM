@@ -13,6 +13,7 @@ def greetings():
 	for line in open("Greeting.txt", "r"): #output lines
 		sys.stdout.write(line) #print line
 		time.sleep(.5)#sleep for 1 second
+	time.sleep(3)
 	toReturn = initopts()
 	return toReturn
 #Description: Initial options allows user to choose if they would like to start a new game or continue
@@ -21,13 +22,13 @@ def initopts():
 	print("		Welcome to Grand Theft Manual!		")
 	print("1) Start a new game \n2) Continue \n3) Help \n4) Quit ")
 	userinput = raw_input("Please choose one of the options by pressing 1, 2, 3, or 4...\n")
-	if userinput == '1': 
+	if userinput == "1": 
 		newgame()
-	elif userinput == '2':
+	elif userinput == "2":
 		continuegame()
-	elif userinput == '3': 
+	elif userinput == "3": 
 		displayhelp()
-	elif userinput == '4':
+	elif userinput == "4":
 		toReturn = 1
 	else: 
 		print("Your input was incorrect! Please try again!")
