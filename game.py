@@ -11,7 +11,7 @@ fighters = ('Louie','Bob','Darren','Big Boy Bruno','Tyrone','Pedro','Hilter','Ma
 def greetings():
 	toReturn = 0 #return var
 	#Greeting part
-	sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=40, cols=150))
+	sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=35, cols=130))
 	os.system("clear")
 	for line in open("Greeting.txt", "r"): #output lines
 		sys.stdout.write(line) #print line
