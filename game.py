@@ -102,9 +102,7 @@ def usermove():
 	possible = 0
 	print("Test input")
 	userChoice=raw_input("Choose your option: \n")
-<<<<<<< HEAD
 	print(userChoice)
-=======
 	
 	for choice in possibleChoice:
 		if possible == 0: 
@@ -118,4 +116,3 @@ def usermove():
 	else:
 		errors.badChoice()
 	
->>>>>>> 3ebcf7eee3a7093f2965d3ed8cb092ed34960f8a
