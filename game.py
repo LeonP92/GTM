@@ -161,7 +161,7 @@ def fight(environment):
 		successHit = 0
 		if userMove=='a':
 			print("Choose your item")
-			itemUsed = usermove([getitems()])
+			itemUsed = usermove(getitems())
 		elif userMove=='b':
 			print("You threw a punch at "+fighter)
 			for i in range(myLevel+1):
@@ -188,7 +188,7 @@ def getitems():
 	file = open("character.txt","r")
 	for i, line in enumerate(file):
 		if re.match("Items:",line):
-			line.replace("Items: ","")
+			line = line.replace("Items: ","")
 			return line.split(",")
 #Description: Gets the money from text file
 def parse(getItem):	
