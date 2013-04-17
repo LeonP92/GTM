@@ -114,7 +114,6 @@ def showshop():
 	print data
 	f.close()
 	item = raw_input("What do you need from me?? [Hint: Type in what you want, you can also type 'steal [item name]' but be prepared to fight the shop keeper!\n")
-
 #Description: Function for the fight scene
 def fight(environment):
 	if environment == store:

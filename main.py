@@ -1,7 +1,6 @@
 #!/usr/bin/env python2
 
 import game, errors, time
-import game, errors
 
 def main():
 	userChoice = ""
