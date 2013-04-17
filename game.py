@@ -140,6 +140,7 @@ def showshop(toShow):
 		showshop(1)
 #Description: Function for the fight scene
 def fight(environment):
+	# Determine fighter
 	if environment == "store":
 		fighter = "Clerk"
 	elif environment == "street":
@@ -148,14 +149,46 @@ def fight(environment):
 		fighter = "Cop"
 	elif environment == "stranger":
 		fighter = "Stranger"
-	health = int(parse("Level"))*random.randrange(20,100)
-	getitems()
+	fighterHealth = int(parse("Level"))*random.randrange(20,100)
+	print(fighter+" has appeared and wants to throw some punches!")
+	
+	# Fight and move selection
+	myHealth = parse("Health")
+	myLevel = int(parse("Level"))	
+	while myHealth>0 and fighterHealth>0:
+		print("What do you want to do?")
+		userMove = usermove(["A) Use Item","B) Punch","C) Kick","D) Block"])
+		successHit = 0
+		if userMove=='a':
+			print("Choose your item")
+			itemUsed = usermove(getitems())
+		elif userMove=='b':
+			print("You threw a punch at "+fighter)
+			for i in range(myLevel+1):
+				successHit = random.randrange(0,2)
+				if successHit==1:
+					break	
+		elif userMove=='c':
+			print("Wam!")
+		elif userMove=='d':
+			print("Wam!")
+
+		if successHit==1:
+			fighterHealth=fighterHealth - random.randrange(0,20)
+			print("Successful hit!\n"+fighter+"'s health is now "+str(fighterHealth))
+		else: 
+			print("Miss yo!")
+	
+	if fighterHealth<=0:
+		print("You lost")
+	else:
+		print("You won!")		
 #Description:
 def getitems():
 	file = open("character.txt","r")
 	for i, line in enumerate(file):
 		if re.match("Items:",line):
-			line.replace("Items: ","")
+			line = line.replace("Items: ","")
 			return line.split(",")
 #Description: Gets the money from text file
 def parse(getItem):	
