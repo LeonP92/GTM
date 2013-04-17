@@ -1,11 +1,11 @@
 #!/usr/bin/env python2
 
 import game, errors, time
+import game, errors
+
 def main():
 	userChoice = ""
 	gameOn = 0
-	game.parse('Money')
-	time.sleep(2)
 	gameOn = game.greetings()
 	while gameOn==0: 
 		userChoice = game.usermove("Fight Stranger", "Rob Stranger", "Rest", "Shop", "Cry")
@@ -14,6 +14,5 @@ def main():
 		if userChoice == 'q':
 			break
 	print("Thanks for playing!")
-
 if __name__ == "__main__":
 	main()

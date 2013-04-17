@@ -11,23 +11,10 @@ def greetings():
 	toReturn = 0 #return var
 	#Greeting part
 	os.system('clear')
-	print("********************************************************")
-	time.sleep(1) #sleeps for 1 seconds
-	print("*    _________       ____________     _____________    *")
-	time.sleep(1) 
-	print("*    |                    |           |     |     |    *")
-	time.sleep(1) 
-	print("*    |     ___            |           |     |     |    *")
-	time.sleep(1)
-	print("*    |       |            |           |     |     |    *")
-	time.sleep(1) 
-	print("*    |_______|            |           |     |     |    *")
-	time.sleep(1) 
-	print("*                                                      *")
-	time.sleep(1) 
-	print("********************************************************")
+	for line in open("Greeting.txt", "r"): #output lines
+		sys.stdout.write(line) #print line
+		time.sleep(.5)#sleep for 1 second
 	time.sleep(3)
-	os.system('clear')
 	toReturn = initopts()
 	return toReturn
 #Description: Initial options allows user to choose if they would like to start a new game or continue
@@ -35,15 +22,14 @@ def initopts():
 	toReturn = 0
 	print("		Welcome to Grand Theft Manual!		")
 	print("1) Start a new game \n2) Continue \n3) Help \n4) Quit ")
-	userinput = input("Please choose one of the options by pressing 1, 2, 3, or 4...\n")
-	
-	if userinput == 1: 
+	userinput = raw_input("Please choose one of the options by pressing 1, 2, 3, or 4...\n")
+	if userinput == "1": 
 		newgame()
-	elif userinput == 2:
+	elif userinput == "2":
 		continuegame()
-	elif userinput == 3: 
+	elif userinput == "3": 
 		displayhelp()
-	elif userinput == 4:
+	elif userinput == "4":
 		toReturn = 1
 	else: 
 		print("Your input was incorrect! Please try again!")
@@ -121,6 +107,7 @@ def usermove(optA, optB, optC, optD, optE):
 		errors.badChoice()
 #Description: This will be show the items in the shop
 def showshop():
+	possible = 0
 	f = open("items.txt", "r")
 	data = f.read()
 	print("\nWelcome to the weapon shop! BETTER NOT STEAL ANYTHING...")
