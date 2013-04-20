@@ -5,7 +5,6 @@ import game, errors, time
 def main():
 	userChoice = ""
 	gameOn = 0
-	game.fight("street")
 	gameOn = game.greetings()
 	while gameOn==0: 
 		userChoice = game.usermove(["A) Fight Stranger", "B) Rob Stranger", "C) Rest", "D) Shop", "E) Cry"],0)
