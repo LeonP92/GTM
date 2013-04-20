@@ -1,0 +1,13 @@
+<<<<<<< HEAD
+title: Text-based GTA
+contributors: pho , awesome , martin , gcs278
+type: game
+repo: ece2524git@ece2524.ece.vt.edu:pho/project.git
+description: This project is based off of the popular console and PC game Grand Theft Auto. We will be making a text based version where the user can choose from several actions and an appropriate response will appear. We might also implement images to appear showing the player of their action and what not. 
+=======
+title: Text-Based Grand Theft Auto
+contributors: pho martin awesome
+type: game
+repo: ece2524.ece.vt.edu:gcs278/project.gi
+description: Grand theft auto texted based adventure game. May implement graphics using pygame module. Will consist of a map and different object one may encounter such as police, citizens and stores.
+>>>>>>> 58707578c6dc33882a31524bab8a50a7ff64a55b
