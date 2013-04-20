@@ -1,4 +1,5 @@
-import sys, errors, time, os, fileinput, re, random, string
+# GAME.py file
+import sys, errors, time, os, fileinput, re, random, string,fight
 
 possibleChoice = ('a', 'b', 'c', 'd', 'e', 'q') #used for basic choices
 items = ('bat', 'knife', 'bow', 'pistol', 'rifle') #Used for shop info
@@ -158,6 +159,13 @@ def showshop(toShow):
 		showshop(1)
 	else:
 		print("Alright... come again soon!")
+#Description: Gets the money from text file
+def parse(getItem):
+        file = open("character.txt","r")
+        for i, line in enumerate(file):
+                if re.match(getItem,line):
+                        return line.replace(getItem+": ","")
+
 #Description: Changes the value of the desire character attribute in the file
 def changeFileValue(attribute,value):
 	file = open("character.txt","r")

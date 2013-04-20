@@ -1,4 +1,4 @@
-import sys, errors, time, os, fileinput, re, random, string
+import sys, errors, time, os, fileinput, re, random, string,game
 #Description: Function for the fight scene
 def fight(environment):
 	os.system("clear")
@@ -21,10 +21,12 @@ def fight(environment):
 	myHealth = int(game.parse("Health"))
 
 	while myHealth>0 and fighterHealth>0:
+		printHealth(myHealth)
+		print(hilight(fighter+"'s health is  "+str(fighterHealth),'31',1))
 		damage = userFightMove(fighter)
-		time.sleep(2)
-		os.system("clear")
 		if damage>0:
+	                time.sleep(2)
+        	        os.system("clear")
 			fighterHealth=fighterHealth - damage
 			if fighterHealth<=0:
 				break
@@ -40,12 +42,8 @@ def fight(environment):
 			myHealth=myHealth-damage
 			if myHealth<=0:
 				break
-			elif myHealth>=80:
-				print("Your health is now "+hilight(str(myHealth),'32',1))
-			elif myHealth<80 and myHealth>=30:	
-				print("Your health is now "+hilight(str(myHealth),'33',1))
-			elif myHealth<30:
-				print("Your health is now "+hilight(str(myHealth),'31',1))
+			else:
+				printHealth(myHealth)
 		time.sleep(4)
 		os.system("clear")
 	
@@ -57,17 +55,21 @@ def fight(environment):
 #Description: Determines User move on thier input
 def userFightMove(fighter):
 	while(1):
-		print("What do you want to do?")
+		print(hilight("What do you want to do?",'34',1))
 		# Your Move
 		userMove = game.usermove(["A) Use Item","B) Punch","C) Kick","D) Run"],0)
 		os.system("clear")
 		if userMove=='a':
-			print("Choose your item")
-			userMove = game.usermove(getitems(),1)
-			os.system("clear")
-			damage = itemAttack(userMove)
-			if not damage == -1:
-				return damage
+			itemList = getitems()
+			if itemList[0]=="A) none\n":
+				print(hilight("You have no items bro!",'31',1))
+			else:
+				print("Choose your item")
+				userMove = game.usermove(getitems(),1)
+				os.system("clear")
+				damage = itemAttack(userMove)
+				if not damage == -1:
+					return damage
 		elif userMove=='b':
 			print("You threw a punch at "+fighter)
 			return attack("me",5)
@@ -75,11 +77,12 @@ def userFightMove(fighter):
 			print("You threw a kick at "+fighter)
 			return attack("me",5)
 		elif userMove=='d':
-			if random.randrange(0,2)==1:
+			if random.randrange(0,11)>8:
 				print(hilight("WHEW! You got out of this joker's way",'32',1))
 				return -1
 			else:
 				print(hilight(fighter+" grabbed you so you wouldn't run!",'31',1))
+				return 0
 	return 0
 #Description: Determines the power of an attack
 # DamageRange is first value a decent hit will randomize at
@@ -94,20 +97,32 @@ def attack(whichFighter,damageRange):
 			break
 	damage = 0
 	if hitType==0:
-		print(hilight("Miss yo!",'31',1))
+		if whichFighter=="me":
+			print(hilight("Whoops. Miss!",'31',1))
+		else:
+			print(hilight("Whew! He missed!",'32',1))
 		return 0
 	elif hitType==1:
 		damage = random.randrange(damageRange,damageRange+10)
-		print(hilight("Decent Hit of "+str(damage),'33',1))
+		if whichFighter=="me":
+			print(hilight("Cool, a decent Hit of "+str(damage),'33',1))
+		else:
+			print(hilight("Ouch man, decent hit of "+str(damage),'33',1))
 		return damage
 	elif hitType==2:
 		damage= random.randrange(damageRange+11,damageRange+20)
-		print(hilight("Critical Hit of "+str(damage),'32',1))
+		if whichFighter=="me":
+			print(hilight("HECK YA! Critical Hit of "+str(damage),'32',1))
+		else:
+			print(hilight("OUCCHHHHH!!!!! Critical Hit of "+str(damage),'31',1))
 		return damage
 #Description: Determines attack when using an item
 def itemAttack(item):
 	itemList = getitems()
-	if not item:
+	if item>len(itemList):
+		print("Incorrect selection")
+		time.sleep(2)
+		os.system("clear")
 		return -1
 	item = itemList[item-1]
 	item = item.replace(") ","")
@@ -139,12 +154,6 @@ def getitems():
 	for i, item in enumerate(items):
 		 returnList.append(allTheLetters[i]+") "+item)
 	return returnList
-#Description: Gets the money from text file
-def parse(getItem):	
-	file = open("character.txt","r")
-	for i, line in enumerate(file):
-		if re.match(getItem,line):
-			return line.replace(getItem+": ","")
 #Description: Changes the color of the string, USE COLOR CHART, bold=1
 def hilight(string, color, bold):
 	attr = []
@@ -152,4 +161,12 @@ def hilight(string, color, bold):
 	if bold:
 		attr.append('1')
 	return '\x1b[%sm%s\x1b[0m' % (';'.join(attr), string)
-
+def printHealth(myHealth):
+	
+	if myHealth>=80:
+		print("Your health is "+hilight(str(myHealth),'32',1))
+	elif myHealth<80 and myHealth>=30:
+		print("Your health is "+hilight(str(myHealth),'33',1))
+	elif myHealth<30:
+		print("Your health is "+hilight(str(myHealth),'31',1))
+	
