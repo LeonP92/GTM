@@ -2,5 +2,5 @@ Name: Grant
 Level: 1
 Health: 100
 Money: 0
-Items: Bomb,Gun,Mace
+Items: Bat,Gun,Rifle
 Mission: 0
