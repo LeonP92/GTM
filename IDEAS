@@ -1,6 +1,5 @@
-game: command line game of chess
-game: text-based aventure game
-game: text-based kickboxing
-game: text-based pokemon game
-game: text-based nascar game
-game: grand theft auto
+game: Adventure Game: text-based adventure game
+game: Kickboxing: text-based kickboxing
+game: Pokemon: text-based pokemon game
+game: Nascar: text-based nascar game
+game: GTA: grand theft auto
