@@ -1,6 +1,7 @@
-Name: Grant
+Name: Leon
 Level: 1
 Health: 100
 Money: 0
-Items: bat,knife,bow,pistol,rifle
+Items: none
 Mission: 0
+Progress: 1

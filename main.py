@@ -1,13 +1,16 @@
 #!/usr/bin/env python2
 
-import game, errors, time
+import game, errors, time, fight
+
+#default choice list
+defchoice = ["A) Fight", "B) Rob", "C) Mission", "D) Shop", "E) Rest"] 
 
 def main():
 	userChoice = ""
 	gameOn = 0
 	gameOn = game.greetings()
 	while gameOn==0: 
-		userChoice = game.usermove(["A) Fight Stranger", "B) Rob Stranger", "C) Rest", "D) Shop", "E) Cry"],0)
+		userChoice = game.usermove(defchoice, 0)
 		if userChoice == 'd':
 			game.showshop(0)
 		if userChoice == 'q':

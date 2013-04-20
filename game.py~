@@ -1,7 +1,7 @@
-import sys, errors, time, os, fileinput, re, random
+import sys, errors, time, os, fileinput, re, random, string
 
-possibleChoice = ('A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'Q', 'q') #used for basic choices
-items = ('baseball bat', 'baseball', 'bat', 'knife', 'bow', 'pistol', 'rifle', 'steal baseball bat', 'steal baseball', 'steal bat', 'steal knife', 'steal bow', 'steal pistol', 'steal rifle') #Used for shop info
+possibleChoice = ('a', 'b', 'c', 'd', 'e', 'q') #used for basic choices
+items = ('bat', 'knife', 'bow', 'pistol', 'rifle') #Used for shop info
 fighters = ('Louie','Bob','Darren','Big Boy Bruno','Tyrone','Pedro','Hilter','Martin','Hobo Martin','Fat Joe',\
 'Oscar','Alfonso','Swollen Lou','Butter Knife Pietro','Busted Kneecaps Fabrizio','Petty Crime Salvatore') #Fighter's names
 
@@ -58,6 +58,7 @@ def newgame():
 #Description: This will continue a game  if one is already saved if not it will return the user to the main menu
 def continuegame():
 	os.system("clear")
+	prog = parse("Progress")
 	fileExists = errors.filecheck('character.txt')
 	if fileExists == 0:
 		print("Resuming saved game...")
@@ -66,6 +67,8 @@ def continuegame():
 	else:
 		print("There is no saved game, please choose another option \n")
 		initopts()
+	if  prog == '1':
+		fight.fight("stanger")
 #Description: This will display the Help file
 def displayhelp():
 	os.system("clear")
@@ -92,14 +95,22 @@ def intro(file):
 	time.sleep(2)
 	print("Stranger: Well " + username + " it's not safe to lay around here... what do you want to do??")
 	#Writes in character file
-	file.write("Name: "+ username +"\nLevel: 1\nHealth: 100\nMoney: 0\nItems: none\nMission: 0")	
+	file.write("Name: "+ username +"\nLevel: 1\nHealth: 100\nMoney: 0\nItems: none\nMission: 0\nProgress: 1")	
+
+	#Give user the choices / Action taken on choices
+	userChoice = usermove(["A) Fight Stranger", "B) Rob Stranger", "C) Talk to Stranger", "D) Shop", "E) Rest"],0)
+	if userChoice == 'a':
+			fight.fight("stranger")
+	else:
+		print "HELP"
 #Description this will be the basic user move, when they are not in the missions or fights
-def usermove(optionList):
+# *** Input numbers=0 uses ABC numbers=1 uses 1,2,3
+def usermove(optionList,numbers):
 	possible = 0
 	i = 0 #temporary variable
 	for items in optionList:
 		print(items)
-	userChoice=raw_input("Choose your option [Hit Q to quit]: ")
+	userChoice=raw_input("Choose your option [Hit Q to quit]: ").lower()
 	
 	for choice in possibleChoice:
 		if possible == 0: 
@@ -108,11 +119,14 @@ def usermove(optionList):
 		else:
 			break
 	if possible == 1:
-		userChoice = userChoice.lower()
+		if numbers == 0:
+			userChoice = userChoice.lower()
+		elif numbers == 1:
+			userChoice = ord(userChoice.lower()) - ord('a')+1
 		return userChoice
 	else:
 		errors.badChoice()
-#Description: This will be show the items in the shop
+#Description: This will be show the items in the shop should always take in the parameter of 0 if being called by other functions
 def showshop(toShow):
 	possible = 0
 	if toShow==0:
@@ -125,74 +139,28 @@ def showshop(toShow):
 	for item in items:
 		if possible == 0:
 			if userinput == item:
-				possible = 1
+				if userinput.split()[0] == 'steal': #If first word was steal... then possible = 2
+					possible = 1
+				else:
+					possible = 2
 			elif userinput == "q":
-				possible = 2
+				possible = 3
 		else:
 			break;
 	if possible == 0:
 		print("What was that? I couldn't understand you.... Try again or leave...")
-	elif possible != 2:
+		showshop(1)
+	elif possible == 1: #shop keeper fight
+		print "HEY... HEY PUNK, TRYING TO STEAL STUFF? WELL I HOPE YOU CAN FIGHT!"
+		fight.fight("shop")
+	elif possible != 3 or possible !=1:
 		print("Can I do anything else for ya?")
 		showshop(1)
 	else:
 		print("Alright... come again soon!")
-		
-#Description: Function for the fight scene
-def fight(environment):
-	# Determine fighter
-	if environment == "store":
-		fighter = "Clerk"
-	elif environment == "street":
-		fighter = fighters[random.randrange(len(fighters))]
-	elif environment == "bank":
-		fighter = "Cop"
-	elif environment == "stranger":
-		fighter = "Stranger"
-	fighterHealth = int(parse("Level"))*random.randrange(20,100)
-	print(fighter+" has appeared and wants to throw some punches!")
-	
-	# Fight and move selection
-	myHealth = parse("Health")
-	myLevel = int(parse("Level"))	
-	while myHealth>0 and fighterHealth>0:
-		print("What do you want to do?")
-		userMove = usermove(["A) Use Item","B) Punch","C) Kick","D) Block"])
-		successHit = 0
-		if userMove=='a':
-			print("Choose your item")
-			itemUsed = usermove(getitems())
-		elif userMove=='b':
-			print("You threw a punch at "+fighter)
-			for i in range(myLevel+1):
-				successHit = random.randrange(0,2)
-				if successHit==1:
-					break	
-		elif userMove=='c':
-			print("Wam!")
-		elif userMove=='d':
-			print("Wam!")
-
-		if successHit==1:
-			fighterHealth=fighterHealth - random.randrange(0,20)
-			print("Successful hit!\n"+fighter+"'s health is now "+str(fighterHealth))
-		else: 
-			print("Miss yo!")
-	
-	if fighterHealth<=0:
-		print("You lost")
-	else:
-		print("You won!")		
-#Description: Returns items user have
-def getitems():
+#Description: Changes the value of the desire character attribute in the file
+def changeFileValue(attribute,value):
 	file = open("character.txt","r")
-	for i, line in enumerate(file):
-		if re.match("Items:",line):
-			line = line.replace("Items: ","")
-			return line.split(",")
-#Description: Gets the money from text file
-def parse(getItem):	
-	file = open("character.txt","r")
-	for i, line in enumerate(file):
-		if re.match(getItem,line):
-			return line.replace(getItem+": ","")
+	
+	#if attribute=="health":
+		# Replace the health variable
