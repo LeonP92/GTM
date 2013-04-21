@@ -59,17 +59,16 @@ def newgame():
 #Description: This will continue a game  if one is already saved if not it will return the user to the main menu
 def continuegame():
 	os.system("clear")
-	prog = parse("Progress")
 	fileExists = errors.filecheck('character.txt')
 	if fileExists == 0:
 		print("Resuming saved game...")
 		time.sleep(1)
-		print("Welcome back " + parse("Name"))
+		print("Welcome back " + parse("Name") + "\n")
+		if parse("Progress") == '1':
+			fight.fight("stranger")
 	else:
 		print("There is no saved game, please choose another option \n")
 		initopts()
-	if  prog == '1':
-		fight.fight("stanger")
 #Description: This will display the Help file
 def displayhelp():
 	os.system("clear")
