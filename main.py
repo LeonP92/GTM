@@ -8,7 +8,6 @@ defchoice = ["A) Fight", "B) Rob", "C) Mission", "D) Shop", "E) Rest"]
 def main():
 	userChoice = ""
 	gameOn = 0
-	fight.fight("stranger")
 	gameOn = game.greetings()
 	while gameOn==0: 
 		userChoice = game.usermove(defchoice, 0)

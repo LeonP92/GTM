@@ -96,7 +96,7 @@ def intro(file):
 	print("Stranger: Well " + username + " it's not safe to lay around here... what do you want to do??")
 	#Writes in character file
 	file.write("Name: "+ username +"\nLevel: 1\nHealth: 100\nMoney: 0\nItems: none\nMission: 0\nProgress: 1")	
-
+	file.close()
 	#Give user the choices / Action taken on choices
 	userChoice = usermove(["A) Fight Stranger", "B) Rob Stranger", "C) Talk to Stranger", "D) Shop", "E) Rest"],0)
 	if userChoice == 'a':
@@ -164,7 +164,7 @@ def parse(getItem):
         for i, line in enumerate(file):
                 if re.match(getItem,line):
                         return line.replace(getItem+": ","")
-
+	file.close()
 #Description: Changes the value of the desire character attribute in the file
 def changeFileValue(attribute,value):
 	file = open("character.txt","r")
