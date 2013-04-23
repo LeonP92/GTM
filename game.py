@@ -122,7 +122,7 @@ def intro(file, prog):
 		changeAttr(6, "2")
 		shop.showshop(0)
 	elif userChoice == 'e': #Rest but you don't need it
-		print(fight.hilight("\nYou just woke up! You don't need a rest yet...",'31',1)
+		print(fight.hilight("\nYou just woke up! You don't need a rest yet...",'31',1))
 		file = open("character.txt", "a+")
 		intro(file, 1)
 		file.close()

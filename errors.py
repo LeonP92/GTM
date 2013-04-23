@@ -1,3 +1,4 @@
+#For simple errors: May or may not use
 import sys, os
 
 def badChoice():

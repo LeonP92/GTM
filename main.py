@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-
+#Main file for the GTM game!
 import game, errors, time, fight, shop, robnrest
 
 #default choice list
