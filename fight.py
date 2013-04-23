@@ -1,4 +1,7 @@
-import sys, errors, time, os, fileinput, re, random, string, game
+import sys, errors, time, os, fileinput, re, random, string, game, robnrest
+
+fighters = ('Louie','Bob','Darren','Big Boy Bruno','Tyrone','Pedro','Hilter','Martin','Hobo Martin','Fat Joe',\
+'Oscar','Alfonso','Swollen Lou','Butter Knife Pietro','Busted Kneecaps Fabrizio','Petty Crime Salvatore') #Fighter's names
 #Description: Function for the fight scene
 def fight(environment):
 	os.system("clear")
@@ -44,13 +47,21 @@ def fight(environment):
 				break
 			else:
 				printHealth(myHealth)
+				game.changeAttr(2, str(myHealth)) #Updates health in character file
 		time.sleep(4)
 		os.system("clear")
-	
 	if fighterHealth<=0:
 		print(hilight("You won!",'32',1))
+		robnrest.addmoney(20,70)
+		robnrest.addexp(20, 100)
+		time.sleep(2)
 	elif myHealth<=0:
 		print(hilight("You lost loser...",'31',1))
+		tempvar= raw_input("Continue the game? " + hilight("[Y to continue and anything else to return to main menu]", '33',1)).lower()
+		if tempvar == 'y': #Restarts the game from check point
+			game.continuegame()
+		else: #Game
+			game.greetings()
 	time.sleep(5)
 #Description: Determines User move on thier input
 def userFightMove(fighter):

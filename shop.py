@@ -10,10 +10,10 @@ def showshop(toShow):
 	if toShow==0:
 		f = open("items.txt", "r")
 		data = f.read()
-		print("\nWelcome to the weapon shop! BETTER NOT STEAL ANYTHING...")
+		print(fight.hilight("\nWelcome to the weapon shop!",33,1) + fight.hiilight("BETTER NOT STEAL ANYTHING...", '31',1))
 		print data
 		f.close()
-	userinput = raw_input("What do you need from me?? [Hint: Type in what you want, you can also type 'steal [item name]' but be prepared to fight the shop keeper! Also hit Q to quit]\n").lower()
+	userinput = raw_input("What do you need from me??" +fight.hilight("[Hint: Type in what you want, you can also type 'steal [item name]' but be prepared to fight the shop keeper! Also hit Q to quit and I for character info]\n",'33',1)).lower()
 	for item in items:
 		if possible == 0:
 			if userinput == item: #item match without stealing
@@ -22,6 +22,8 @@ def showshop(toShow):
 					possible = 1
 			elif userinput == "q":
 				possible = 3
+			elif userinput =="i":
+				possible = 4
 		else:
 			break;
 		itemCost = itemCost+1
@@ -29,13 +31,18 @@ def showshop(toShow):
 		print("What was that? I couldn't understand you.... Try again or leave...")
 		showshop(1)
 	elif possible == 1: #shop keeper fight
-		print "HEY... HEY PUNK, TRYING TO STEAL STUFF? WELL I HOPE YOU CAN FIGHT!"
+		print fight.hiilight("HEY... HEY PUNK, TRYING TO STEAL STUFF? WELL I HOPE YOU CAN FIGHT!",'31',1)
 		fight.fight("shop")
 	elif possible == 3:
 		print("Alright... come again soon!")
+	elif possible == 4:
+		game.displayfile("character.txt")
+		showshop(1)
 	else:
 		if money >= (itemCost*300) :
-			print("\nItem Purchased! You bought: " + items[itemCost-1])
+			game.changeAttr(3, str(money - (itemCost*300)))
+			game.changeAttr(4, items[itemCost-1])
+			print("\nItem Purchased! You bought: " + items[itemCost-1] +". You now have: $" + game.parse("Money"))
 			print("Can I do anything else for ya?")
 		else:
 			print("\nHey That item costs: " + str(itemCost*300) + "!")
