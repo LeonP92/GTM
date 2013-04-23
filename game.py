@@ -1,8 +1,7 @@
 # GAME.py file
-import sys, errors, time, os, fileinput, re, random, string,fight
+import sys, errors, time, os, fileinput, re, random, string,fight, shop
 
 possibleChoice = ('a', 'b', 'c', 'd', 'e', 'q') #used for basic choices
-items = ('bat', 'knife', 'bow', 'pistol', 'rifle') #Used for shop info
 fighters = ('Louie','Bob','Darren','Big Boy Bruno','Tyrone','Pedro','Hilter','Martin','Hobo Martin','Fat Joe',\
 'Oscar','Alfonso','Swollen Lou','Butter Knife Pietro','Busted Kneecaps Fabrizio','Petty Crime Salvatore') #Fighter's names
 
@@ -54,7 +53,7 @@ def newgame():
 			initopts()
 	else:
 		file = open("character.txt", "a+")
-		intro(file)
+		intro(file, 0)
 		file.close()
 #Description: This will continue a game  if one is already saved if not it will return the user to the main menu
 def continuegame():
@@ -64,8 +63,11 @@ def continuegame():
 		print("Resuming saved game...")
 		time.sleep(1)
 		print("Welcome back " + parse("Name") + "\n")
+		time.sleep(2)
 		if parse("Progress") == '1':
-			fight.fight("stranger")
+			file = open("character.txt", "a+")
+			intro(file, 1)
+			file.close()
 	else:
 		print("There is no saved game, please choose another option \n")
 		initopts()
@@ -79,28 +81,37 @@ def displayhelp():
 	raw_input("\nPress any key to return to the main menu...")
 	initopts()
 #Description: This is when user name and such will be recorded
-def intro(file): 
+def intro(file, prog): 
 	#waking up
 	os.system("clear")
-	print(".....")
-	time.sleep(2)
-	print(".... Ugh... My head hurts... Where am I?")
-	time.sleep(2)
-	#Stranger encountered
-	print("Stranger: Hey buddy, you okay?")
-	print("Stranger: You looked pretty roughed up man... the gangs around get ya?")
-	time.sleep(3)
-	print("Stranger: Not much of a talker eh? What's your name??")
-	username = raw_input("You: Uh.... I'm... [Type in your name]\n")
-	time.sleep(2)
-	print("Stranger: Well " + username + " it's not safe to lay around here... what do you want to do??")
-	#Writes in character file
-	file.write("Name: "+ username +"\nLevel: 1\nHealth: 100\nMoney: 0\nItems: none\nMission: 0\nProgress: 1")	
-	file.close()
+	if prog == 0:
+		print(".....")
+		time.sleep(2)
+		print(".... Ugh... My head hurts... Where am I?")
+		time.sleep(2)
+		#Stranger encountered
+		print("Stranger: Hey buddy, you okay?")
+		print("Stranger: You looked pretty roughed up man... the gangs around get ya?")
+		time.sleep(3)
+		print("Stranger: Not much of a talker eh? What's your name??")
+		username = raw_input("You: Uh.... I'm... [Type in your name]\n")
+		time.sleep(2)
+		print("Stranger: Well " + username + " it's not safe to lay around here... what do you want to do??")
+		#Writes in character file
+		file.write("Name: "+ username +"\nLevel: 1\nHealth: 100\nMoney: 0\nItems: none\nMission: 0\nProgress: 1")	
+		file.close()
 	#Give user the choices / Action taken on choices
+	if prog !=0:
+		print("Well... What do you want to do??")
 	userChoice = usermove(["A) Fight Stranger", "B) Rob Stranger", "C) Talk to Stranger", "D) Shop", "E) Rest"],0)
 	if userChoice == 'a':
-			fight.fight("stranger")
+		fight.fight("stranger")
+	elif userChoice == 'b':
+		print("You just met the poor guy...")
+	elif userChoice == 'c':
+		print("You: Hey....")
+	elif userChoice == 'd':
+		shop.showshop(0)
 	else:
 		print "HELP"
 #Description this will be the basic user move, when they are not in the missions or fights
@@ -126,38 +137,7 @@ def usermove(optionList,numbers):
 		return userChoice
 	else:
 		errors.badChoice()
-#Description: This will be show the items in the shop should always take in the parameter of 0 if being called by other functions
-def showshop(toShow):
-	possible = 0
-	if toShow==0:
-		f = open("items.txt", "r")
-		data = f.read()
-		print("\nWelcome to the weapon shop! BETTER NOT STEAL ANYTHING...")
-		print data
-		f.close()
-	userinput = raw_input("What do you need from me?? [Hint: Type in what you want, you can also type 'steal [item name]' but be prepared to fight the shop keeper! Also hit Q to quit]\n").lower()
-	for item in items:
-		if possible == 0:
-			if userinput == item:
-				if userinput.split()[0] == 'steal': #If first word was steal... then possible = 2
-					possible = 1
-				else:
-					possible = 2
-			elif userinput == "q":
-				possible = 3
-		else:
-			break;
-	if possible == 0:
-		print("What was that? I couldn't understand you.... Try again or leave...")
-		showshop(1)
-	elif possible == 1: #shop keeper fight
-		print "HEY... HEY PUNK, TRYING TO STEAL STUFF? WELL I HOPE YOU CAN FIGHT!"
-		fight.fight("shop")
-	elif possible != 3 or possible !=1:
-		print("Can I do anything else for ya?")
-		showshop(1)
-	else:
-		print("Alright... come again soon!")
+
 #Description: Gets the money from text file
 def parse(getItem):
         file = open("character.txt","r")

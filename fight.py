@@ -1,4 +1,4 @@
-import sys, errors, time, os, fileinput, re, random, string,game
+import sys, errors, time, os, fileinput, re, random, string, game
 #Description: Function for the fight scene
 def fight(environment):
 	os.system("clear")
@@ -12,7 +12,7 @@ def fight(environment):
 	elif environment == "stranger":
 		fighter = "Stranger"
 	fighterHealth = int(game.parse("Level"))*random.randrange(60,120)
-	print(fighter+" has appeared and wants to throw some punches!")
+	print(fighter+" wants to throw some punches!")
 	print(fighter+"'s health is "+str(fighterHealth))
 	time.sleep(2)
 	os.system("clear")
