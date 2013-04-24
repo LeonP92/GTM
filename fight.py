@@ -174,12 +174,14 @@ def userFightMove(fighter):
 			if itemList[0]=="A) none\n":
 				print(hilight("You have no items bro!",'31',1))
 			else:
-				print("Choose your item")
-				userMove = game.usermove(getitems(),1)
-				os.system("clear")
-				damage = itemAttack(userMove)
-				if not damage == -1:
-					return damage
+				while(1):
+					print("Choose your item")
+					userMove = game.usermove(getitems(),1)
+					os.system("clear")
+					damage = itemAttack(userMove)
+					if not damage == -1:
+						return damage
+					print(hilight("Dawg choose an actually item ya dig?",'31',1))
 		elif userMove=='b':
 			print("You threw a punch at "+fighter)
 			return attack("me",5)
@@ -213,7 +215,7 @@ def userFightMoveMission(fighter):
 				os.system("clear")
 				damage = itemAttack(userMove)
 				if not damage == -1:
-					return damage
+					return damagae
 		elif userMove=='b':
 			print("You threw a punch at "+fighter)
 			return attack("me",5)
@@ -263,10 +265,7 @@ def attack(whichFighter,damageRange):
 #Description: Determines attack when using an item
 def itemAttack(item):
 	itemList = getitems()
-	if item>len(itemList):
-		print("Incorrect selection")
-		time.sleep(2)
-		os.system("clear")
+	if not item>=0 or item>len(itemList):
 		return -1
 	item = itemList[item-1]
 	item = item.replace(") ","")

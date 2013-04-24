@@ -1,6 +1,6 @@
 Name: Grant
 Level: 2
-Health: 143
+Health: 98
 Money: 2888713
 Items: pistol rifle bat bow rifle
 Mission: 1
