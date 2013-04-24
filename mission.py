@@ -1,3 +1,5 @@
+# MISSION Implemenation File
+
 import sys, errors, time, os, fileinput, re, random, string, game, robnrest, fight
 
 def mission(missionNum):
@@ -16,8 +18,9 @@ def mission(missionNum):
 	game.changeAttr(6, "3")
 	#fights
 	print(fight.hilight("You try to be sneaky but man you're a gangster not some ninja... get ready to fight!",'31',1))
-	while fights != 3:
-		fight.missionfight(missionNum)
+	while fights != 2:
+		fight.missionfight(missionNum,fights)
+		fights = fights+1
 	print(fight.hilight("Voice: Oi Oi Oi, What's going on...",'31',1))
 	raw_input(fight.hilight("PREPARE FOR THE BOSS FIGHT! [Press any key to start]", '33',1))
 	fight.missionfight(missionNum+10)

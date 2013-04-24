@@ -1,3 +1,5 @@
+# SHOP Implementation File
+
 import game, sys, errors, time, os, fileinput, re, random, string, fight
 
 items = ('bat', 'knife', 'bow', 'pistol', 'rifle') #Used for shop info
@@ -10,16 +12,17 @@ def showshop(toShow):
 	if toShow==0:
 		f = open("items.txt", "r")
 		data = f.read()
-		print(fight.hilight("\nWelcome to the weapon shop!",33,1) + fight.hiilight("BETTER NOT STEAL ANYTHING...", '31',1))
+		print(fight.hilight("\nWelcome to the weapon shop!",'33',1) + fight.hilight("BETTER NOT STEAL ANYTHING...", '31',1))
 		print data
 		f.close()
 	userinput = raw_input("What do you need from me??" +fight.hilight("[Hint: Type in what you want, you can also type 'steal [item name]' but be prepared to fight the shop keeper! Also hit Q to quit and I for character info]\n",'33',1)).lower()
 	for item in items:
 		if possible == 0:
-			if userinput == item: #item match without stealing
+			if userinput.lower() == item.lower(): #item match without stealing
 					possible = 2
 			elif userinput.split()[0] == 'steal': #If first word was steal... then possible = 2
 					possible = 1
+					stealing = userinput.split()[1]
 			elif userinput == "q":
 				possible = 3
 			elif userinput =="i":
@@ -31,8 +34,10 @@ def showshop(toShow):
 		print("What was that? I couldn't understand you.... Try again or leave...")
 		showshop(1)
 	elif possible == 1: #shop keeper fight
-		print fight.hiilight("HEY... HEY PUNK, TRYING TO STEAL STUFF? WELL I HOPE YOU CAN FIGHT!",'31',1)
-		fight.fight("shop")
+		print fight.hilight("HEY... HEY PUNK, TRYING TO STEAL STUFF? WELL I HOPE YOU CAN FIGHT!",'31',1)
+		if fight.fight("shop"):
+			print(fight.hilight("NICE WORK MAN! You just stole a "+stealing,'32',1))
+			game.changeAttr(4,stealing)
 	elif possible == 3:
 		print("Alright... come again soon!")
 	elif possible == 4:

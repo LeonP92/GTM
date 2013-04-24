@@ -1,3 +1,5 @@
+# ROBNREST Implemenation File
+
 import sys, errors, time, os, fileinput, re, random, string, game, fight
 
 #Rob function: Will give a chance to rob someone, if chances fail then you will have to fight them.
@@ -9,8 +11,11 @@ def rob(environment):
 	else:
 		print(fight.hilight("Uh oh...\nStranger: Hey punk, who do you think you're robbing?!... PREPARE TO GET YO KNEES BUSTED SON!",'31',1))
 		time.sleep(2)
-		fight.fight(environment)
-		return 0
+		# If you won the fight, get stuff from guy
+		if fight.fight(environment):
+			return -1
+		else:
+			return 0
 #Restores all HP
 def rest():
 	temp = 0
@@ -29,16 +34,16 @@ def rest():
 	print(fight.hilight("You've rested and your health has been recovered!", '32', 1))
 #Adds money tdepending on a random int
 def addmoney(int1, int2):
-	earned = randrange(int1, int2)
+	earned = random.randrange(int1, int2)
 	money = int(game.parse("Money")) + earned #random amount of money
 	print(fight.hilight("You got " + str(earned) + " cash money homie!",'32',1))
 	game.changeAttr(3, str(money)) #changes money in character file
 #Adds experience depending on random ints parameter
 def incexp(int1, int2):
 	level = int(game.parse("Level"))
-	earned = randrange(int1, int2)
+	earned = random.randrange(int1, int2)
 	currentExp = int(game.parse("Experience")) + earned
-	print(fight.hilight("You gained " + earned + " street cred!"))
+	print(fight.hilight("You gained " + str(earned) + " street cred!",'32',1))
 	if level*500 <= currentExp:
 		level = level + 1
 		print(fight.hilight("YOU LEVELED UP IN DA HOOD! You're now level " + str(level), '32',1))

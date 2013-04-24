@@ -1,3 +1,5 @@
+# FIGHT Implemenation File
+
 import sys, errors, time, os, fileinput, re, random, string, game, robnrest
 
 fighters = ('Louie','Bob','Darren','Big Boy Bruno','Tyrone','Pedro','Hilter','Martin','Hobo Martin','Fat Joe',\
@@ -6,7 +8,7 @@ fighters = ('Louie','Bob','Darren','Big Boy Bruno','Tyrone','Pedro','Hilter','Ma
 def fight(environment):
 	os.system("clear")
 	# Determine fighter
-	if environment == "store":
+	if environment == "shop":
 		fighter = "Clerk"
 	elif environment == "street":
 		fighter = fighters[random.randrange(len(fighters))]
@@ -53,8 +55,9 @@ def fight(environment):
 	if fighterHealth<=0:
 		print(hilight("You won!",'32',1))
 		robnrest.addmoney(20,70)
-		robnrest.addexp(20, 100)
+		robnrest.incexp(20, 100)
 		time.sleep(2)
+		return 1
 	elif myHealth<=0:
 		print(hilight("You lost loser...",'31',1))
 		#Calculate the amoutn of money and experience lost
@@ -63,7 +66,10 @@ def fight(environment):
 		game.changeAttr(3, moneyLost)
 		game.changeAttr(7, expLost)
 		#displays amount lost
-		print(hilight("You lost " + moneyLost + " dollas and " + expLost + " experience! Pick on someone you can take dawg", '31',1))
+		print(hilight("You lost " + moneyLost + " dollas and " + expLost + " experience! Pick on someone you can take dawg", '31',1))		    
+		# Trying to Rob Clerk, Exit now
+		if environment=="shop":
+			return 0
 		tempvar= raw_input("Continue the game? " + hilight("[Y to continue and anything else to return to main menu]", '33',1)).lower()
 		if tempvar == 'y': #continue game from last stop point
 			robnrest.rest()
@@ -74,16 +80,23 @@ def fight(environment):
 			game.greetings()
 	time.sleep(5)
 #Description: Function for the fight scene
-def missionfight(mission):
+def missionfight(mission,fightNumber):
 	os.system("clear")
 	# Determine fighter
 	if mission == 1:
-		fighter = "Los Rochos Scrub" #Los Rochos scrub
-	elif environment == 11: 
+		if fightNumber == 0:
+			fighter = "Los Rochos Scrub" #Los Rochos scrub
+		elif fightNumber == 1:
+			print(hilight("Dang Bro, fight this dawg!",'31',1))
+			fighter = "Los Rochos Dog"
+		elif fightNumber == 2:
+			print(hilight("O SNAP YALL, THEY A CLOWN IN THIS HOUSE",'31',1))
+			fighter = "Los Rochos Clown"
+	elif mission == 11: 
 		fighter == "Los Rochos Boss: Tank Sartov"
-	elif environment == 2:
+	elif mission == 2:
 		fighter = 4
-	elif environment == 12:
+	elif mission == 12:
 		fighter = 6
 	#mission health even is boss
 	if mission>10 == 0:
@@ -92,7 +105,7 @@ def missionfight(mission):
 		fighterHealth = int(game.parse("Level"))*random.randrange(20,100) + 100
 	print(fighter+": You'll regret messing with us!")
 	print(fighter+"'s health is "+str(fighterHealth))
-	time.sleep(2)
+	time.sleep(4)
 	os.system("clear")
 	damage = 0
 	# Fight and move selection
@@ -128,7 +141,7 @@ def missionfight(mission):
 		print(hilight("You won!",'32',1))
 		print
 		robnrest.addmoney(50,120)
-		robnrest.addexp(70, 150)
+		robnrest.incexp(70, 150)
 		time.sleep(2)
 	elif myHealth<=0:
 		print(hilight("You lost loser...",'31',1))
@@ -277,10 +290,11 @@ def getitems():
 	for i, line in enumerate(file):
 		if re.match("Items:",line):
 			line = line.replace("Items: ","")
-			items = line.split(",")
+			items = line.split(" ")
 	for i, item in enumerate(items):
 		 returnList.append(allTheLetters[i]+") "+item)
 	return returnList
+
 #Description: Changes the color of the string, USE COLOR CHART, bold=1
 def hilight(string, color, bold):
 	attr = []
@@ -288,12 +302,14 @@ def hilight(string, color, bold):
 	if bold:
 		attr.append('1')
 	return '\x1b[%sm%s\x1b[0m' % (';'.join(attr), string)
+
+#Description: Prints the health of the user
 def printHealth(myHealth):
-	
+	# Green = Good, Yellow = Ok, Red = Bad
 	if myHealth>=80:
 		print("Your health is "+hilight(str(myHealth),'32',1))
 	elif myHealth<80 and myHealth>=30:
 		print("Your health is "+hilight(str(myHealth),'33',1))
 	elif myHealth<30:
 		print("Your health is "+hilight(str(myHealth),'31',1))
-	
+
