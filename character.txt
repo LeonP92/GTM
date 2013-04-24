@@ -3,6 +3,6 @@ Level: 1
 Health: 150
 Money: 0
 Items: none
-Mission: 0
+Mission: 1
 Progress: 2
 Experience: 0

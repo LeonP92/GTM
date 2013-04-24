@@ -1,6 +1,8 @@
 Name: Grant
 Level: 1
-Money: 1500
-Items: bat pistol
+Health: 150
+Money: 0
+Items: none
 Mission: 0
-Progress: 1
+Progress: 2
+Experience: 0

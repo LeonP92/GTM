@@ -16,8 +16,8 @@ def rest():
 	temp = 0
 	Rest = "Resting"
 	health = int(game.parse("Level"))*50 + 100
-	game.changeAttr(2, health)
-	while temp != 10: #Displays a screen
+	game.changeAttr(2, str(health))
+	while temp != 7: #Displays a screen
 		os.system("clear")
 		print(Rest)
 		if Rest == "Resting....":
@@ -26,7 +26,7 @@ def rest():
 			Rest = Rest + "."
 		temp = temp + 1
 		time.sleep(1) #Waits 1 second
-	print(fight.hiilight("You've rest and your health has been recovered!", '32', 1))
+	print(fight.hilight("You've rested and your health has been recovered!", '32', 1))
 #Adds money tdepending on a random int
 def addmoney(int1, int2):
 	earned = randrange(int1, int2)

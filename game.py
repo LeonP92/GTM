@@ -68,6 +68,8 @@ def continuegame():
 			file = open("character.txt", "a+")
 			intro(file, 1)
 			file.close()
+		elif int(parse("Progress")) == 3:
+			mission.mission(int(parse("Mission")))
 	else:
 		print("There is no saved game, please choose another option \n")
 		initopts()
@@ -94,11 +96,11 @@ def intro(file, prog):
 		print(fight.hilight("Stranger: You looked pretty roughed up man... the gangs around get ya?",'32',1))
 		time.sleep(3)
 		print(fight.hilight("Stranger: Not much of a talker eh? What's your name??",'32',1))
-		username = raw_input("You: Uh.... I'm... [Type in your name]\n")
+		username = raw_input(fight.hilight("You: Uh.... I'm... [Type in your name]\n",'36',1))
 		time.sleep(2)
 		print(fight.hilight("Stranger: Well " + username + " it's not safe to lay around here... what do you want to do??",'32',1))
 		#Writes in character file
-		file.write("Name: "+ username +"\nLevel: 1\nHealth: 150\nMoney: 0\nItems: none\nMission: 0\nProgress: 1\nExperience: 0")	
+		file.write("Name: "+ username +"\nLevel: 1\nHealth: 150\nMoney: 0\nItems: none\nMission: 1\nProgress: 1\nExperience: 0")	
 		file.close()
 	#Give user the choices / Action taken on choices
 	if prog == 1:
