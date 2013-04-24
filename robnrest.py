@@ -48,5 +48,5 @@ def incexp(int1, int2):
 		level = level + 1
 		print(fight.hilight("YOU LEVELED UP IN DA HOOD! You're now level " + str(level), '32',1))
 		game.changeAttr(1, str(level)) #Increase level
-		currentExp = currentExp - (level*500)
+		currentExp = currentExp - ((level-1)*500)
 	game.changeAttr(7, str(earned + currentExp)) #Change exp 

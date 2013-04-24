@@ -18,7 +18,7 @@ def showshop(toShow):
 	userinput = raw_input("What do you need from me??" +fight.hilight("[Hint: Type in what you want, you can also type 'steal [item name]' but be prepared to fight the shop keeper! Also hit Q to quit and I for character info]\n",'33',1)).lower()
 	for item in items:
 		if possible == 0:
-			if userinput.lower() == item.lower(): #item match without stealing
+			if userinput == item.lower(): #item match without stealing
 					possible = 2
 			elif userinput.split()[0] == 'steal': #If first word was steal... then possible = 2
 					possible = 1
@@ -45,11 +45,29 @@ def showshop(toShow):
 		showshop(1)
 	else:
 		if money >= (itemCost*300) :
-			game.changeAttr(3, str(money - (itemCost*300)))
-			game.changeAttr(4, items[itemCost-1])
-			print("\nItem Purchased! You bought: " + items[itemCost-1] +". You now have: $" + game.parse("Money"))
+			canBuy = checkItem(userinput)
+			if canBuy == 0: # can buy
+				game.changeAttr(3, str(money - (itemCost*300)))
+				game.changeAttr(4, items[itemCost-1])
+				print("\nItem Purchased! You bought: " + items[itemCost-1] +". You now have: $" + game.parse("Money"))
+			else:
+				print(fight.hilight("Man you have that item! You don't want it again!",'31',1))
 			print("Can I do anything else for ya?")
 		else:
 			print("\nHey That item costs: " + str(itemCost*300) + "!")
 			print("You don't have enough money for that punk! You trying to pull a quick one on me???? EHH???")
 		showshop(1)
+#Prevent user from buying multiple of the same item!
+def checkItem(item):
+	exists = 0
+	text = game.parse("Items")
+	text = text.rstrip('\n')
+	words = text.split()
+	for items in words:
+		if exists == 0:
+			if item == items.lower():
+				exists = 1
+		else:
+			break
+	return exists
+		

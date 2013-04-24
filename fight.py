@@ -90,7 +90,7 @@ def missionfight(mission,fightNumber):
 			print(hilight("Dang Bro, fight this dawg!",'31',1))
 			fighter = "Los Rochos Dog"
 		elif fightNumber == 2:
-			print(hilight("O SNAP YALL, THEY A CLOWN IN THIS HOUSE",'31',1))
+			print(hilight("O SNAP YALL, THERE BE A CLOWN IN THIS HOUSE",'31',1))
 			fighter = "Los Rochos Clown"
 	elif mission == 11: 
 		fighter == "Los Rochos Boss: Tank Sartov"
@@ -193,6 +193,8 @@ def userFightMove(fighter):
 			else:
 				print(hilight(fighter+" grabbed you so you wouldn't run!",'31',1))
 				return 0
+		else:
+			print(hilight("Hey man what you trying to do?? Pick legit move dawg", '33', 1))
 	return 0
 #This is a mission fight so you c
 def userFightMoveMission(fighter):
@@ -223,6 +225,8 @@ def userFightMoveMission(fighter):
 			print(hilight("This is a mission fight! You can't run!" ,'33',1))
 			time.sleep(2)
 			return 0
+		else:
+			print(hilight("Hey man what you trying to do?? Pick legit move dawg", '33', 1))
 	return 0
 #Description: Determines the power of an attack
 # DamageRange is first value a decent hit will randomize at
@@ -280,7 +284,7 @@ def itemAttack(item):
 	elif item=="rifle":
 		return attack("me",60)
 	else:
-		print("ERROR: FILE TAMPER")
+		print(hilight("Dude this item no exists home boy!", '31',1))
 		return 0
 #Description: Returns items user have, uses string to append letters for selection
 def getitems():
