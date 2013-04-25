@@ -23,7 +23,7 @@ def mission(missionNum):
 		fights = fights+1
 	print(fight.hilight("Voice: Oi Oi Oi, What's going on...",'31',1))
 	raw_input(fight.hilight("PREPARE FOR THE BOSS FIGHT! [Press any key to start]", '33',1))
-	fight.missionfight(missionNum+10)
+	fight.missionfight(missionNum+10,0)
 	#Increase mission in character file once mission is completed
 	mission_number = str(missionNum + 1)
 	game.changeAttr(5, mission_number)
