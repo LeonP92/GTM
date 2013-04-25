@@ -19,16 +19,25 @@ def rob(environment):
 #Restores all HP
 def rest():
 	temp = 0
+	sleep = 0
 	Rest = "Resting"
 	health = int(game.parse("Level"))*50 + 100
 	game.changeAttr(2, str(health))
 	while temp != 7: #Displays a screen
 		os.system("clear")
-		print(Rest)
-		if Rest == "Resting....":
+		if Rest == "Resting...":
+			game.displayfile("Images/ascii_sleep.txt")
 			Rest = "Resting"
+			print(Rest)
+			sleep = 0
 		else:
+			if sleep == 0:
+				game.displayfile("Images/ascii_sleep1.txt")
+			else:
+				game.displayfile("Images/ascii_sleep2.txt")
 			Rest = Rest + "."
+			print(Rest)
+			sleep = sleep + 1
 		temp = temp + 1
 		time.sleep(1) #Waits 1 second
 	print(fight.hilight("You've rested and your health has been recovered!", '32', 1))
