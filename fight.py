@@ -4,81 +4,22 @@ import sys, errors, time, os, fileinput, re, random, string, game, robnrest
 
 fighters = ('Louie','Bob','Darren','Big Boy Bruno','Tyrone','Pedro','Hilter','Martin','Hobo Martin','Fat Joe',\
 'Oscar','Alfonso','Swollen Lou','Butter Knife Pietro','Busted Kneecaps Fabrizio','Petty Crime Salvatore') #Fighter's names
+
 #Description: Function for the fight scene
-def fight(environment, hp1, hp2):
+def fight(fighter, hp1=100, hp2=120):
 	os.system("clear")
-	# Determine fighter
-	if environment == "shop":
-		fighter = "Clerk"
-	elif environment == "street":
+	# If it is a stranger, choose stranger
+	if fighter == "street":
 		fighter = fighters[random.randrange(len(fighters))]
-	elif environment == "bank":
-		fighter = "Cop"
-	elif environment == "stranger":
-		fighter = "Stranger"
+	# Determine fighter health
 	fighterHealth = int(game.parse("Level"))*random.randrange(hp1, hp2)
 	print(fighter+" wants to throw some punches!")
 	print(fighter+"'s health is "+str(fighterHealth))
-	time.sleep(2)
+	time.sleep(4)
 	os.system("clear")
-	damage = 0
-	# Fight and move selection
-	myHealth = int(game.parse("Health"))
 
-	while myHealth>0 and fighterHealth>0:
-		printHealth(myHealth)
-		print(hilight(fighter+"'s health is  "+str(fighterHealth),'31',1))
-		damage = userFightMove(fighter)
-		if damage>0:
-	                time.sleep(2)
-        	        os.system("clear")
-			fighterHealth=fighterHealth - damage
-			if fighterHealth<=0:
-				break
-			print(hilight(fighter+"'s health is now "+str(fighterHealth),'34',1))
-		elif damage==-1:
-			break
-		time.sleep(2)
-		os.system("clear")
-		print(fighter+"'s Move..")
-		# Fighter's Move
-		damage = attack("Fighter",5)
-		if damage>0:
-			myHealth=myHealth-damage
-			if myHealth<=0:
-				break
-			else:
-				printHealth(myHealth)
-				game.changeAttr(2, str(myHealth))
-		time.sleep(4)
-		os.system("clear")
-	if fighterHealth<=0:
-		print(hilight("You won!",'32',1))
-		robnrest.addmoney(20,70)
-		robnrest.incexp(20, 100)
-		time.sleep(2)
-		return 1
-	elif myHealth<=0:
-		print(hilight("You lost loser...",'31',1))
-		#Calculate the amoutn of money and experience lost
-		moneyLost = str(int(game.parse("Money"))-int(int(game.parse("Money"))*.1))
-		expLost = str(int(game.parse("Experience")) -  int(int(game.parse("Experience"))*.2))
-		game.changeAttr(3, moneyLost)
-		game.changeAttr(7, expLost)
-		#displays amount lost
-		print(hilight("You lost " + moneyLost + " dollas and " + expLost + " experience! Pick on someone you can take dawg", '31',1))		    
-		# Trying to Rob Clerk, Exit now
-		if environment=="shop":
-			return 0
-		tempvar= raw_input("Continue the game? " + hilight("[Y to continue and anything else to return to main menu]", '33',1)).lower()
-		if tempvar == 'y': #continue game from last stop point
-			robnrest.rest()
-			game.continuegame()
-		else: #sends back to game menu
-			health = int(game.parse("Level"))*50 + 100
-			game.changeAttr(2, str(health))
-			game.greetings()
-	time.sleep(5)
+	processFight(fighter,fighterHealth)
+
 #Description: Function for the fight scene
 def missionfight(mission,fightNumber):
 	os.system("clear")
@@ -107,42 +48,55 @@ def missionfight(mission,fightNumber):
 	print(fighter+"'s health is "+str(fighterHealth))
 	time.sleep(4)
 	os.system("clear")
+	# Fight and move selection
+	processFight(fighter,fighterHealth)
+
+#Description: Processed the events in a fight
+def processFight(fighter, fighterHealth):
 	damage = 0
 	# Fight and move selection
 	myHealth = int(game.parse("Health"))
+	
+	# Fight - While someone is still alive
 	while myHealth>0 and fighterHealth>0:
+		# Prints Health of both
 		printHealth(myHealth)
 		print(hilight(fighter+"'s health is  "+str(fighterHealth),'31',1))
-		damage = userFightMoveMission(fighter)
+		
+		# Determine my move and damage I do
+		damage = userFightMove(fighter)
 		if damage>0:
 	                time.sleep(2)
         	        os.system("clear")
 			fighterHealth=fighterHealth - damage
-			if fighterHealth<=0:
+			if fighterHealth<=0: # Check if this hit knocked him out
 				break
 			print(hilight(fighter+"'s health is now "+str(fighterHealth),'34',1))
-		elif damage==-1:
-			break
+		elif damage==-1:# User Ran from Battle!
+			return
+
 		time.sleep(2)
 		os.system("clear")
 		print(fighter+"'s Move..")
 		# Fighter's Move
 		damage = attack("Fighter",5)
-		if damage>0:
+		if damage>0: # If hit, calculate my health
 			myHealth=myHealth-damage
 			if myHealth<=0:
-				break
-			else:
-				printHealth(myHealth)
-				game.changeAttr(2, str(myHealth)) #Updates health in character file
+				break # I Lost!
+		
+		printHealth(myHealth)
+		game.changeAttr(2, str(myHealth))
 		time.sleep(4)
 		os.system("clear")
+	# After Fight has finished, check for winner
 	if fighterHealth<=0:
 		print(hilight("You won!",'32',1))
-		print
-		robnrest.addmoney(50,120)
-		robnrest.incexp(70, 150)
+		robnrest.addmoney(20,70) # Add money
+		robnrest.incexp(20, 100) # Add Experience
 		time.sleep(2)
+		return 1 # Success
+	
 	elif myHealth<=0:
 		print(hilight("You lost loser...",'31',1))
 		#Calculate the amoutn of money and experience lost
@@ -151,91 +105,74 @@ def missionfight(mission,fightNumber):
 		game.changeAttr(3, moneyLost)
 		game.changeAttr(7, expLost)
 		#displays amount lost
-		print(hilight("You lost " + moneyLost + " dollas and " + expLost + " experience! Take a mission you can handle dude...", '31',1))
-		tempvar= raw_input("Continue the game? " + hilight("[Y to continue and anything else to return to main menu]", '33',1)).lower()
-		if tempvar == 'y': #Restarts the game from check point
+		print(hilight("You lost " + moneyLost + " dollas and " + expLost + " experience! Pick on someone you can take dawg", '31',1))		    
+		# Trying to Rob Clerk, Exit now
+		if fighter=="Clerk":
+			return 0
+		continueGame= raw_input("Continue the game? " + hilight("[Y to continue and anything else to return to main menu]", '33',1)).lower()
+		if continueGame == 'y': #continue game from last stop point
 			robnrest.rest()
 			game.continuegame()
-		else: #Game
-			#Resets health
+		else: #sends back to game menu
 			health = int(game.parse("Level"))*50 + 100
 			game.changeAttr(2, str(health))
 			game.greetings()
 	time.sleep(5)
+
 #Description: Determines User move on thier input
+# Returns:	0 = A miss (No Damage)
+#		>0 = A Hit (Damage)
+#		-1 = User Ran from battle successfully
 def userFightMove(fighter):
+	# Loop Until user gets it right
 	while(1):
+		# Inquire Move
 		print(hilight("What do you want to do?",'34',1))
-		# Your Move
 		userMove = game.usermove(["A) Use Item","B) Punch","C) Kick","D) Run"],0)
 		os.system("clear")
-		if userMove=='a':
+		
+		if userMove=='a': # Use Item
+			#Check if User has items
 			itemList = getitems()
 			if itemList[0]=="A) none\n":
 				print(hilight("You have no items bro!",'31',1))
 			else:
+				# Another While loop for selecting item
 				while(1):
 					print("Choose your item")
 					userMove = game.usermove(getitems(),1)
 					os.system("clear")
 					damage = itemAttack(userMove)
-					if not damage == -1:
+					if not damage == -1: # Return Success
 						return damage
+					# If it gets here, User Failed to select actual item
 					print(hilight("Dawg choose an actually item ya dig?",'31',1))
-		elif userMove=='b':
+		elif userMove=='b': # Punch
 			print("You threw a punch at "+fighter)
 			return attack("me",5)
-		elif userMove=='c':
+		elif userMove=='c': # Kick
 			print("You threw a kick at "+fighter)
 			return attack("me",5)
-		elif userMove=='d':
-			if random.randrange(0,11)>8:
+		elif userMove=='d': # Run Attempt
+			if game.parse("Progress")==3:
+				print(hilight(fighter+": WHERE YOU THINK YOU'RE GOING PUNK!??!",'31',1))
+				print(hilight("This is a mission fight! You can't run!" ,'33',1))
+				time.sleep(2)
+				return 0
+			if random.randrange(0,11)>8: # Determine Success
 				print(hilight("WHEW! You got out of this joker's way",'32',1))
-				return -1
+				return -1 # SUCCESS!
 			else:
 				print(hilight(fighter+" grabbed you so you wouldn't run!",'31',1))
-				return 0
-		elif userMove=='i':
+				return 0 # Failure, No damage
+		elif userMove=='i': # Look at chacter file
 			game.displayfile("character.txt")
 			print(hilight("Hey dude, stop checking yourself out and focus on the fight!", '31',1))
+		# Anything else, Incorrect button
 		else:
 			print(hilight("Hey man what you trying to do?? Pick legit move dawg", '33', 1))
 	return 0
-#This is a mission fight so you c
-def userFightMoveMission(fighter):
-	while(1):
-		print(hilight("What do you want to do?",'34',1))
-		# Your Move
-		userMove = game.usermove(["A) Use Item","B) Punch","C) Kick","D) Run"],0)
-		os.system("clear")
-		if userMove=='a':
-			itemList = getitems()
-			if itemList[0]=="A) none\n":
-				print(hilight("You have no items bro!",'31',1))
-			else:
-				print("Choose your item")
-				userMove = game.usermove(getitems(),1)
-				os.system("clear")
-				damage = itemAttack(userMove)
-				if not damage == -1:
-					return damage
-		elif userMove=='b':
-			print("You threw a punch at "+fighter)
-			return attack("me",5)
-		elif userMove=='c':
-			print("You threw a kick at "+fighter)
-			return attack("me",5)
-		elif userMove=='d':
-			print(hilight(fighter+": WHERE YOU THINK YOU'RE GOING PUNK!??!",'31',1))
-			print(hilight("This is a mission fight! You can't run!" ,'33',1))
-			time.sleep(2)
-			return 0
-		elif userMove=='i':
-			game.displayfile("character.txt")
-			print(hilight("Hey dude, stop checking yourself out and focus on the fight!", '31',1))
-		else:
-			print(hilight("Hey man what you trying to do?? Pick legit move dawg", '33', 1))
-	return 0
+
 #Description: Determines the power of an attack
 # DamageRange is first value a decent hit will randomize at
 def attack(whichFighter,damageRange):
@@ -245,7 +182,7 @@ def attack(whichFighter,damageRange):
 		level = 0
 	for i in range(level+1):
 		hitType = random.randrange(0,3)
-		if hitType==0 or hitType==1:
+		if hitType==1:
 			break
 	damage = 0
 	if hitType==0:
@@ -268,7 +205,10 @@ def attack(whichFighter,damageRange):
 		else:
 			print(hilight("OUCCHHHHH!!!!! Critical Hit of "+str(damage),'31',1))
 		return damage
-#Description: Determines attack when using an item
+#Description: Determines attack when User uses an item
+# Returns: 	-1 = No Items in list
+#		 0 = Items, but incorrect selection
+#		>0 = Damage Done by item
 def itemAttack(item):
 	itemList = getitems()
 	if not item>=0 or item>len(itemList):
@@ -289,7 +229,8 @@ def itemAttack(item):
 	elif item=="rifle":
 		return attack("me",60)
 	else:
-		print(hilight("Dude this item no exists home boy!", '31',1))
+		print(hilight("Dawg, what you doing messing with the chacter file?!", '31',1))
+		print("ERROR: No item found by that name")
 		return 0
 #Description: Returns items user have, uses string to append letters for selection
 def getitems():

@@ -1,8 +1,8 @@
-Name: Big Black Nigger
-Level: 2
-Health: 200
-Money: 332
-Items: rifle bow
-Mission: 2
+Name: Grant Hola My Cola Spence
+Level: 1
+Health: 101
+Money: 53
+Items: none
+Mission: 1
 Progress: 2
-Experience: 364
+Experience: 106
