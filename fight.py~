@@ -93,7 +93,7 @@ def missionfight(mission,fightNumber):
 			print(hilight("O SNAP YALL, THERE BE A CLOWN IN THIS HOUSE",'31',1))
 			fighter = "Los Rochos Clown"
 	elif mission == 11: 
-		fighter = "Los Rochos Boss: Tank Sartov"
+		fighter == "Los Rochos Boss: Tank Sartov"
 	elif mission == 2:
 		fighter = 4
 	elif mission == 12:

@@ -1,8 +1,8 @@
-Name: Grant
-Level: 2
-Health: 98
-Money: 2888713
-Items: pistol rifle bat bow
-Mission: 1
+Name: Big Black Nigger
+Level: 1
+Health: 150
+Money: 160
+Items: rifle
+Mission: 2
 Progress: 2
-Experience: 418
+Experience: 494
