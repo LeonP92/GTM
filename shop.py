@@ -35,9 +35,16 @@ def showshop(toShow):
 		showshop(1)
 	elif possible == 1: #shop keeper fight
 		print fight.hilight("HEY... HEY PUNK, TRYING TO STEAL STUFF? WELL I HOPE YOU CAN FIGHT!",'31',1)
-		if fight.fight("shop"):
+		time.sleep(2)
+		fight.fight("shop", 100, int(game.parse("Level"))*110)
+		canSteal = checkItem(stealing)
+		if canSteal == 0:
 			print(fight.hilight("NICE WORK MAN! You just stole a "+stealing,'32',1))
 			game.changeAttr(4,stealing)
+		else: 
+			print(fight.hilight("Home slice... you just beat up the poor sucker for no reason. You got this item", '33', 1))
+		print(fight.hilight("You: Woops... I guess I went too hard on the fool! Better run!", '36', 1))
+		time.sleep(2)
 	elif possible == 3:
 		print("Alright... come again soon!")
 	elif possible == 4:

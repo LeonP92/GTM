@@ -1,8 +1,8 @@
 Name: Big Black Nigger
-Level: 1
-Health: 150
-Money: 160
-Items: rifle
+Level: 2
+Health: 200
+Money: 332
+Items: rifle bow
 Mission: 2
 Progress: 2
-Experience: 494
+Experience: 364

@@ -5,7 +5,7 @@ import sys, errors, time, os, fileinput, re, random, string, game, robnrest
 fighters = ('Louie','Bob','Darren','Big Boy Bruno','Tyrone','Pedro','Hilter','Martin','Hobo Martin','Fat Joe',\
 'Oscar','Alfonso','Swollen Lou','Butter Knife Pietro','Busted Kneecaps Fabrizio','Petty Crime Salvatore') #Fighter's names
 #Description: Function for the fight scene
-def fight(environment):
+def fight(environment, hp1, hp2):
 	os.system("clear")
 	# Determine fighter
 	if environment == "shop":
@@ -16,7 +16,7 @@ def fight(environment):
 		fighter = "Cop"
 	elif environment == "stranger":
 		fighter = "Stranger"
-	fighterHealth = int(game.parse("Level"))*random.randrange(60,120)
+	fighterHealth = int(game.parse("Level"))*random.randrange(hp1, hp2)
 	print(fighter+" wants to throw some punches!")
 	print(fighter+"'s health is "+str(fighterHealth))
 	time.sleep(2)
@@ -195,6 +195,9 @@ def userFightMove(fighter):
 			else:
 				print(hilight(fighter+" grabbed you so you wouldn't run!",'31',1))
 				return 0
+		elif userMove=='i':
+			game.displayfile("character.txt")
+			print(hilight("Hey dude, stop checking yourself out and focus on the fight!", '31',1))
 		else:
 			print(hilight("Hey man what you trying to do?? Pick legit move dawg", '33', 1))
 	return 0
@@ -227,6 +230,9 @@ def userFightMoveMission(fighter):
 			print(hilight("This is a mission fight! You can't run!" ,'33',1))
 			time.sleep(2)
 			return 0
+		elif userMove=='i':
+			game.displayfile("character.txt")
+			print(hilight("Hey dude, stop checking yourself out and focus on the fight!", '31',1))
 		else:
 			print(hilight("Hey man what you trying to do?? Pick legit move dawg", '33', 1))
 	return 0

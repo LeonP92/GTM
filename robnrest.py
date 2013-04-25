@@ -12,7 +12,7 @@ def rob(environment):
 		print(fight.hilight("Uh oh...\nStranger: Hey punk, who do you think you're robbing?!... PREPARE TO GET YO KNEES BUSTED SON!",'31',1))
 		time.sleep(2)
 		# If you won the fight, get stuff from guy
-		if fight.fight(environment):
+		if fight.fight(environment, 20, int(game.parse("Level"))*40):
 			return -1
 		else:
 			return 0
