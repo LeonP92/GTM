@@ -72,7 +72,7 @@ def continuegame():
 		elif int(parse("Progress")) == 3:
 			mission.mission(int(parse("Mission")))
 	else:
-		print("There is no saved game, please choose another option \n")
+		print(fight.hilight("There is no saved game, please choose another option \n",'31',1))
 		initopts()
 #Description: This will display the Help file
 def displayhelp():

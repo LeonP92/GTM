@@ -1,8 +1,0 @@
-Name: Grant
-Level: 2
-Health: 89
-Money: 178
-Items: bat bow rifle pistol knife
-Mission: 2
-Progress: 3
-Experience: 157
