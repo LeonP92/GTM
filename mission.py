@@ -24,6 +24,7 @@ def mission(missionNum):
 		while fights != 2:
 			fight.missionfight(missionNum,fights)
 			fights = fights+1
+			time.sleep(2)
 		print(fight.hilight("Voice: Oi Oi Oi, What's going on...",'31',1))
 		game.displayfile("Images/ascii_buff_dude.txt")
 		raw_input(fight.hilight("PREPARE FOR THE BOSS FIGHT! [Press any key to start]", '33',1))
