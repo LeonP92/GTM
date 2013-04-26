@@ -112,7 +112,7 @@ def endMission(missionNum):
 		print(fight.hilight("*Daisy nods",'36',1))
 		time.sleep(5)
 		os.system('clear')
-		raw_input(fight.hilight("CONGRATULATIONS MAN! YOU BEAT MISSION 4!!",'32',1) + fight.hilight("[Press any key to continue]",'33',1))
+		raw_input(fight.hilight("CONGRATULATIONS MAN! YOU BEAT MISSION 3!!",'32',1) + fight.hilight("[Press any key to continue]",'33',1))
 def endGame():
 	endScene = 1 #Number scene 
 	while endScene < 8:
