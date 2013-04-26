@@ -160,9 +160,6 @@ def userFightMove(fighter):
 					print("Choose your item")
 					userMove = game.usermove(getitems(),1)
 					os.system("clear")
-					game.displayfile("Images/ascii_BAM.txt")
-					print("Using your item!")
-					time.sleep(2)
 					damage = itemAttack(userMove)
 					if not damage == -1: # Return Success
 						return damage
@@ -186,6 +183,8 @@ def userFightMove(fighter):
 				return 0
 			if random.randrange(0,11)>8: # Determine Success
 				print(hilight("WHEW! You got out of this joker's way",'32',1))
+				time.sleep(5)
+				os.system("clear")
 				return -1 # SUCCESS!
 			else:
 				print(hilight(fighter+" grabbed you so you wouldn't run!",'31',1))
@@ -243,7 +242,10 @@ def itemAttack(item):
 	item = item.replace(") ","")
 	item = item.replace("\n","")
 	item = item[1:]
-	
+	game.displayfile("Images/ascii_BAM.txt")
+	print("Using your item!")
+	time.sleep(2)
+
 	if item=="bat":
 		return attack("me",10)
 	elif item=="knife":
