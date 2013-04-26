@@ -12,10 +12,10 @@ def showshop(toShow):
 	if toShow==0:
 		f = open("items.txt", "r")
 		data = f.read()
-		print(fight.hilight("\nWelcome to the weapon shop!",'33',1) + fight.hilight("BETTER NOT STEAL ANYTHING...", '31',1))
+		print(fight.hilight("\nWelcome to the weapon shop!",'33',1) + fight.hilight(" BETTER NOT STEAL ANYTHING...", '31',1))
 		print data
 		f.close()
-	userinput = raw_input("What do you need from me??" +fight.hilight("[Hint: Type in what you want, you can also type 'steal [item name]' but be prepared to fight the shop keeper! Also hit Q to quit and I for character info]\n",'33',1)).lower()
+	userinput = raw_input("What do you need from me??" +fight.hilight(" [Hint: Type in what you want, you can also type 'steal [item name]' but be prepared to fight the shop keeper! Also hit Q to quit and I for character info]\n",'33',1)).lower()
 	for item in items:
 		if possible == 0:
 			if userinput == item.lower(): #item match without stealing

@@ -27,26 +27,37 @@ def missionfight(mission,fightNumber):
 	#displays fighter
 	game.displayfile("Images/ascii_bad_guy_with_gun.txt")
 	# Determine fighter
-	if mission == 1:
-		if fightNumber == 0:
-			fighter = "Los Rochos Scrub" #Los Rochos scrub
-		elif fightNumber == 1:
+	if mission == 1: #Mission 1
+		if fightNumber == 0: #Fight 1
+			fighter = "Los Rochos Scrub"
+		elif fightNumber == 1: #Fight 2
 			print(hilight("Dang Bro, fight this dawg!",'31',1))
 			fighter = "Los Rochos Dog"
-		elif fightNumber == 2:
+		elif fightNumber == 2: #Fight 3
 			print(hilight("O SNAP YALL, THERE BE A CLOWN IN THIS HOUSE",'31',1))
 			fighter = "Los Rochos Clown"
 	elif mission == 11: 
-		fighter = "Los Rochos Boss: Tank Sartov"
-	elif mission == 2:
-		fighter = 4
-	elif mission == 12:
-		fighter = 6
+		fighter = "Los Rochos Boss: Tank Sartov" #Boss fight for mission 1
+	elif mission == 2: #Mission 2
+		if fightNumber == 0: #Fight 1
+			fighter = "Unknown Hooligan" 
+		elif fightNumber == 1: #Fight 2
+			print(hilight("Here comes another one!",'31',1))
+			fighter = "Unknown Skinny Guy"
+		elif fightNumber == 2: #Fight 3
+			print(hilight("They just don't make gangsters like they used to!",'31',1))
+			fighter = "Unknown guy with a ruler"
+	elif mission == 12: #Mission 2 BOSS
+		fighter = "Unknown Big Boss"
+	elif mission == 3:
+		fighter = "Mission 3 henchmen"
+	elif mission == 13:
+		fighter = "Mission 3 Boss"
 	#mission health even is boss
 	if mission>10 == 0:
-		fighterHealth = int(game.parse("Level"))*random.randrange(100,200) + 200
+		fighterHealth = int(game.parse("Level"))*random.randrange(150,200) + 200
 	else:
-		fighterHealth = int(game.parse("Level"))*random.randrange(20,100) + 100
+		fighterHealth = int(game.parse("Level"))*random.randrange(20,100) + 150
 	print(fighter+": You'll regret messing with us!")
 	print(fighter+"'s health is "+str(fighterHealth))
 	time.sleep(4)
@@ -168,7 +179,7 @@ def userFightMove(fighter):
 			time.sleep(2)
 			return attack("me",5)
 		elif userMove=='d': # Run Attempt
-			if game.parse("Progress")==3:
+			if int(game.parse("Progress"))==3:
 				print(hilight(fighter+": WHERE YOU THINK YOU'RE GOING PUNK!??!",'31',1))
 				print(hilight("This is a mission fight! You can't run!" ,'33',1))
 				time.sleep(2)
