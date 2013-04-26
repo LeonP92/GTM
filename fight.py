@@ -229,7 +229,7 @@ def itemAttack(item):
 	elif item=="rifle":
 		return attack("me",60)
 	else:
-		print(hilight("Dawg, what you doing messing with the chacter file?!", '31',1))
+		print(hilight("Dawg, what you doing messing with the character file?!", '31',1))
 		print("ERROR: No item found by that name")
 		return 0
 #Description: Returns items user have, uses string to append letters for selection

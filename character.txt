@@ -2,7 +2,7 @@ Name: Grant Hola My Cola Spence
 Level: 1
 Health: 101
 Money: 53
-Items: none
+Items: bow
 Mission: 1
 Progress: 2
 Experience: 106
