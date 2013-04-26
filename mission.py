@@ -10,11 +10,13 @@ def mission(missionNum):
 	file = open("Missions/"+file_name, 'r')
 	fights = 0
 	#Automatic resting before the mission
+	print(fight.hilight("You gotta rest before going into a mission!",'33',1))
+	time.sleep(2)
 	robnrest.rest()
 	for lines in file:
 		print lines.rstrip('\n')
 		time.sleep(2)
-	raw_input("Press any button to start the mission" + fight.hilight("[Remember once you start a mission you can't stop!]",'31',1))
+	raw_input("Press any button to start the mission" + fight.hilight(" [Remember once you start a mission you can't stop!]",'31',1))
 	game.changeAttr(6, "3")
 	#fights
 	print(fight.hilight("You try to be sneaky but man you're a gangster not some ninja... get ready to fight!",'31',1))
@@ -22,7 +24,7 @@ def mission(missionNum):
 		fight.missionfight(missionNum,fights)
 		fights = fights+1
 	print(fight.hilight("Voice: Oi Oi Oi, What's going on...",'31',1))
-	game.displayfile("Images/ascii_buff_guy.txt")
+	game.displayfile("Images/ascii_buff_dude.txt")
 	raw_input(fight.hilight("PREPARE FOR THE BOSS FIGHT! [Press any key to start]", '33',1))
 	fight.missionfight(missionNum+10,0)
 	#Increase mission in character file once mission is completed
@@ -47,3 +49,21 @@ def endMission(missionNum):
 		time.sleep(.5)
 		os.system('clear')
 		raw_input(fight.hilight("CONGRATULATIONS MAN! YOU BEAT MISSION 1!!",'32',1) + fight.hilight("[Press any key to continue]",'33',1))
+	elif missionNum == 2:
+		print(fight.hilight("You: You better tell me why you took me and everything you know homie... or things are about to get real!", '36',1))
+		time.sleep(1)
+		print(fight.hilight("Unkown Boss: Alright, alright... I'm the leader of The Big Nasty, Big N, man... we just some small fries... ",'31',1))
+		time.sleep(1)
+		print(fight.hilight("Big N: We were told to kidnap you and get rid of you, the big gangs wanted you out dude! I don't know why I don't ask any questions homie!", '31',1))
+		time.sleep(1)
+		print(fight.hilight("You: Well you shoulda just done me in for when you can! Tell me who should I repay for these bruises?? If not you can always get the payment...",'36',1))
+		time.sleep(1)
+		print(fight.hilight("Big N: Whoa whoa dawg, not me thats for sure! If anything you should seek out Big Benny of the Grande Nachos! You can find their hangout under the bridge",'31',1))
+		time.sleep(1)
+		print(fight.hilight("You: Thanks bud... here's a good bye gift for alllll you've done for me",'36',1))
+		time.sleep(1)
+		print(fight.hilight("Big N: HEY MAN WHAT???? AHGHHHHHH!",'31',1))
+		time.sleep(5)
+		os.system('clear')
+		raw_input(fight.hilight("CONGRATULATIONS MAN! YOU BEAT MISSION 1!!",'32',1) + fight.hilight("[Press any key to continue]",'33',1))
+		
