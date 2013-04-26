@@ -189,5 +189,5 @@ def displayfile(file):
 	file = open(file, 'r')
 	print("")
 	for lines in file:
-		print fight.hilight(lines.rstrip('\n'),'35',1)
+		print fight.hilight(lines.rstrip('\n'),'34',1)
 	print("")

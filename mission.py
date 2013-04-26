@@ -4,34 +4,39 @@ import sys, errors, time, os, fileinput, re, random, string, game, robnrest, fig
 
 def mission(missionNum):
 	os.system('clear')
-	print(fight.hilight("Going into a mission...", '30',1))
-	time.sleep(2) #Wait 2 seconds
-	file_name = "Mission"+str(missionNum)+".txt"
-	file = open("Missions/"+file_name, 'r')
-	fights = 0
-	#Automatic resting before the mission
-	print(fight.hilight("You gotta rest before going into a mission!",'33',1))
-	time.sleep(2)
-	robnrest.rest()
-	for lines in file:
-		print lines.rstrip('\n')
+	if(missionNum != 5):
+		print(fight.hilight("Going into a mission...", '30',1))
+		time.sleep(2) #Wait 2 seconds
+		file_name = "Mission"+str(missionNum)+".txt"
+		file = open("Missions/"+file_name, 'r')
+		fights = 0
+		#Automatic resting before the mission
+		print(fight.hilight("You gotta rest before going into a mission!",'33',1))
 		time.sleep(2)
-	raw_input("Press any button to start the mission" + fight.hilight(" [Remember once you start a mission you can't stop!]",'31',1))
-	game.changeAttr(6, "3")
-	#fights
-	print(fight.hilight("You try to be sneaky but man you're a gangster not some ninja... get ready to fight!",'31',1))
-	while fights != 2:
-		fight.missionfight(missionNum,fights)
-		fights = fights+1
-	print(fight.hilight("Voice: Oi Oi Oi, What's going on...",'31',1))
-	game.displayfile("Images/ascii_buff_dude.txt")
-	raw_input(fight.hilight("PREPARE FOR THE BOSS FIGHT! [Press any key to start]", '33',1))
-	fight.missionfight(missionNum+10,0)
-	#Increase mission in character file once mission is completed
-	mission_number = str(missionNum + 1)
-	game.changeAttr(5, mission_number)
-	#end mission scene
-	endMission(missionNum)
+		robnrest.rest()
+		for lines in file:
+			print lines.rstrip('\n')
+			time.sleep(2)
+		raw_input("Press any button to start the mission" + fight.hilight(" [Remember once you start a mission you can't stop!]",'31',1))
+		game.changeAttr(6, "3")
+		#fights
+		print(fight.hilight("You try to be sneaky but man you're a gangster not some ninja... get ready to fight!",'31',1))
+		while fights != 2:
+			fight.missionfight(missionNum,fights)
+			fights = fights+1
+		print(fight.hilight("Voice: Oi Oi Oi, What's going on...",'31',1))
+		game.displayfile("Images/ascii_buff_dude.txt")
+		raw_input(fight.hilight("PREPARE FOR THE BOSS FIGHT! [Press any key to start]", '33',1))
+		fight.missionfight(missionNum+10,0)
+		#Increase mission in character file once mission is completed
+		mission_number = str(missionNum + 1)
+		game.changeAttr(5, mission_number)
+		#end mission scene
+		endMission(missionNum)
+		if missionNum == 4:
+			endGame()			
+	else:
+		print(fight.hilight("You beat the game! Feel free to go around beating up and robbing strangers though, the hood is yours!", '32',1))
 #The story end scene for missions
 def endMission(missionNum):
 	if missionNum == 1:
@@ -66,4 +71,15 @@ def endMission(missionNum):
 		time.sleep(5)
 		os.system('clear')
 		raw_input(fight.hilight("CONGRATULATIONS MAN! YOU BEAT MISSION 1!!",'32',1) + fight.hilight("[Press any key to continue]",'33',1))
-		
+def endGame():
+	endScene = 1 #Number scene 
+	while endScene < 8:
+		os.system('clear')
+		game.displayfile("End/End"+str(endScene)+".txt")
+		endScene = endScene + 1
+		time.sleep(1)
+	time.sleep(3)
+	game.displayfile("End/End"+str(endScene)+".txt")
+	print(fight.hilight("Congratulations on beating Grand Theft Manual! You can continue robbing and beating up people however you want!",'32',1))
+	time.sleep(3)
+	

@@ -4,31 +4,32 @@ import game, errors, time, fight, shop, robnrest, mission
 
 #default choice list
 defchoice = ["A) Fight", "B) Rob", "C) Mission", "D) Shop", "E) Rest"] 
-
-def main():
-	userChoice = ""
-	gameOn = 0
-	gameOn = game.greetings()
-	while gameOn==0: 
-		print(fight.hilight("\nWhat are you trying to do home boy??",'36',1))
-		userChoice = game.usermove(defchoice, 0)
-		if userChoice == 'a':
+#Main message that includes the main while loop to run the game
+def main(): 
+	userChoice = "" #User choice variable
+	gameOn = 0 #As long as it is 0 the game will continue to run
+	gameOn = game.greetings() #Starts off th game
+	while gameOn==0:  #Main while loop
+		print(fight.hilight("\nWhat are you trying to do home boy??",'36',1)) 
+		userChoice = game.usermove(defchoice, 0) #Gets user choice
+		if userChoice == 'a': #Gets into a random fight 
 			fight.fight("street", int(game.parse("Level"))*80, int(game.parse("Level"))*150)
-		elif userChoice == 'b':
+		elif userChoice == 'b': #Robs chances could also lead into a fight
 			robnrest.rob("street")
-		elif userChoice == 'c':
+		elif userChoice == 'c': #Misison
+			#Makes sure user really wants to go into a mission
 			sure = raw_input(fight.hilight("Are you sure you want to go into the mission? Most mission are hard unless you're a certain level... Check the help for more info ",'31',1)+fight.hilight("[Press Y if you want to start the mission and any other key to run away like a wimp] ",'33',0)).lower()
-			if sure == 'y':
+			if sure == 'y': #If user is sure call on the mission function
 				mission.mission(int(game.parse("Mission")))
 			time.sleep(2)
-		elif userChoice == 'd':
+		elif userChoice == 'd': #Shows shop
 			shop.showshop(0)
-		elif userChoice == 'e':
+		elif userChoice == 'e': #Rests and restores hp
 			robnrest.rest()
-		elif userChoice == 'i':
+		elif userChoice == 'i': #Shows character info
 			game.displayfile("character.txt")
 		elif userChoice == 'q':
-			gameOn = game.initopts()
+			gameOn = game.initopts() #Quits out of the game changing gameOn to 1
 	print(fight.hilight("I see the hood was too much for you... Come back when you is a man enough to handle it. PEACE",'32',1))
 if __name__ == "__main__":
 	main()
