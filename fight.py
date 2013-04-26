@@ -46,13 +46,35 @@ def missionfight(mission,fightNumber):
 			fighter = "Unknown Skinny Guy"
 		elif fightNumber == 2: #Fight 3
 			print(hilight("They just don't make gangsters like they used to!",'31',1))
-			fighter = "Unknown guy with a ruler"
+			fighter = "Unknown guy with a calculator"
 	elif mission == 12: #Mission 2 BOSS
 		fighter = "Unknown Big Boss"
-	elif mission == 3:
-		fighter = "Mission 3 henchmen"
-	elif mission == 13:
-		fighter = "Mission 3 Boss"
+	elif mission == 3: #Mission 3
+		if fightNumber == 0: #Fight 1
+			print(hilight("Uh Oh Lil'Barso coming in strong",'31',1))
+			fighter = "Lil' Barso" 
+		elif fightNumber == 1: #Fight 2
+			print(hilight("Vagos: 'Hope you're not too tired to fight me bic boi'",'31',1))
+			fighter = "Vagos"
+		elif fightNumber == 2: #Fight 3
+			print(hilight("Quesolo: You gonna pay fo what you did to my bros",'31',1))
+			fighter = "Quesolo"
+	elif mission == 13: #Mission 3 boss
+		print(hilight("Big Benny: Your dime is gonna go great with my collection!",'31',1))
+		fighter = "Big Benny"
+	elif mission == 4: #Mission4
+		if fightNumber == 0: #Fight 1
+			print(hilight("Red Panther Guard: Hey furriend prepare to get pumbled!",'31',1))
+			fighter = "Red Panther Guard" 
+		elif fightNumber == 1: #Fight 2
+			print(hilight("Red Panther Enforcer: Boss is gonna think I'm pawsome when I take you down!",'31',1))
+			fighter = "Red Panther Enforcer"
+		elif fightNumber == 2: #Fight 3
+			print(hilight("Red Panther Punisher: Meow.",'31',1))
+			fighter = "Red Panther Punisher"
+	elif mission == 13: #Mission 4 Boss name
+		print(hilight("Big Cat: You think you can take me on and take your girl back?? Forget about it... that kitty kat is mine forever! We make a purrrfect pair!",'31',1))
+		fighter = "Big Cat"
 	#mission health even is boss
 	if mission>10 == 0:
 		fighterHealth = int(game.parse("Level"))*random.randrange(150,200) + 200
@@ -108,7 +130,7 @@ def processFight(fighter, fighterHealth):
 		game.displayfile("Images/ascii_dead_person.txt")
 		print(hilight("You won!",'32',1))
 		robnrest.addmoney(20,70) # Add money
-		robnrest.incexp(20, 100) # Add Experience
+		robnrest.incexp(int(game.parse("Level"))*20, int(game.parse("Level"))*100) # Add Experience
 		time.sleep(2)
 		return 1 # Success
 	
