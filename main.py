@@ -13,7 +13,7 @@ def main():
 		print(fight.hilight("\nWhat are you trying to do home boy??",'36',1))
 		userChoice = game.usermove(defchoice, 0)
 		if userChoice == 'a':
-			fight.fight("street", 50, int(game.parse("Level"))*80)
+			fight.fight("street", int(game.parse("Level"))*80, int(game.parse("Level"))*150)
 		elif userChoice == 'b':
 			robnrest.rob("street")
 		elif userChoice == 'c':

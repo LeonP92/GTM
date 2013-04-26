@@ -1,13 +1,14 @@
 # FIGHT Implemenation File
-
+#import necessary modules
 import sys, errors, time, os, fileinput, re, random, string, game, robnrest
 
-fighters = ('Louie','Bob','Darren','Big Boy Bruno','Tyrone','Pedro','Hilter','Martin','Hobo Martin','Fat Joe',\
-'Oscar','Alfonso','Swollen Lou','Butter Knife Pietro','Busted Kneecaps Fabrizio','Petty Crime Salvatore') #Fighter's names
+fighters = ('Louie','Bob','Darren','Big Boy Bruno','Tyrone','Pedro','Hilter','Martin','Hobo Martin','Fat Joe','Oscar','Alfonso','Swollen Lou','Butter Knife Pietro','Busted Kneecaps Fabrizio','Petty Crime Salvatore') #Fighter's names
 
 #Description: Function for the fight scene
 def fight(fighter, hp1=100, hp2=120):
 	os.system("clear")
+	#displays fighter
+	game.displayfile("Images/ascii_bad_guy_with_gun.txt")
 	# If it is a stranger, choose stranger
 	if fighter == "street":
 		fighter = fighters[random.randrange(len(fighters))]
@@ -17,12 +18,14 @@ def fight(fighter, hp1=100, hp2=120):
 	print(fighter+"'s health is "+str(fighterHealth))
 	time.sleep(4)
 	os.system("clear")
-
-	return processFight(fighter,fighterHealth)
+	#fight portion
+	processFight(fighter,fighterHealth)
 
 #Description: Function for the fight scene
 def missionfight(mission,fightNumber):
 	os.system("clear")
+	#displays fighter
+	game.displayfile("Images/ascii_bad_guy_with_gun.txt")
 	# Determine fighter
 	if mission == 1:
 		if fightNumber == 0:
@@ -49,7 +52,7 @@ def missionfight(mission,fightNumber):
 	time.sleep(4)
 	os.system("clear")
 	# Fight and move selection
-	return processFight(fighter,fighterHealth)
+	processFight(fighter,fighterHealth)
 
 #Description: Processed the events in a fight
 def processFight(fighter, fighterHealth):
@@ -73,7 +76,7 @@ def processFight(fighter, fighterHealth):
 				break
 			print(hilight(fighter+"'s health is now "+str(fighterHealth),'34',1))
 		elif damage==-1:# User Ran from Battle!
-			return -1
+			return
 
 		time.sleep(2)
 		os.system("clear")
@@ -84,13 +87,14 @@ def processFight(fighter, fighterHealth):
 			myHealth=myHealth-damage
 			if myHealth<=0:
 				break # I Lost!
-		
 		printHealth(myHealth)
 		game.changeAttr(2, str(myHealth))
 		time.sleep(4)
 		os.system("clear")
 	# After Fight has finished, check for winner
 	if fighterHealth<=0:
+		#displays ascii image for victory
+		game.displayfile("Images/ascii_dead_person.txt")
 		print(hilight("You won!",'32',1))
 		robnrest.addmoney(20,70) # Add money
 		robnrest.incexp(20, 100) # Add Experience
@@ -98,6 +102,9 @@ def processFight(fighter, fighterHealth):
 		return 1 # Success
 	
 	elif myHealth<=0:
+		#displays ascii image for death
+		game.displayfile("Images/ascii_you_dead.txt")
+		time.sleep(2)
 		print(hilight("You lost loser...",'31',1))
 		#Calculate the amoutn of money and experience lost
 		moneyLost = str(int(game.parse("Money"))-int(int(game.parse("Money"))*.1))
@@ -117,7 +124,6 @@ def processFight(fighter, fighterHealth):
 			health = int(game.parse("Level"))*50 + 100
 			game.changeAttr(2, str(health))
 			game.greetings()
-		return 0
 	time.sleep(5)
 
 #Description: Determines User move on thier input
@@ -143,16 +149,23 @@ def userFightMove(fighter):
 					print("Choose your item")
 					userMove = game.usermove(getitems(),1)
 					os.system("clear")
+					game.displayfile("Images/ascii_BAM.txt")
+					print("Using your item!")
+					time.sleep(2)
 					damage = itemAttack(userMove)
 					if not damage == -1: # Return Success
 						return damage
 					# If it gets here, User Failed to select actual item
 					print(hilight("Dawg choose an actually item ya dig?",'31',1))
 		elif userMove=='b': # Punch
+			game.displayfile("Images/ascii_fist.txt")
 			print("You threw a punch at "+fighter)
+			time.sleep(2)
 			return attack("me",5)
 		elif userMove=='c': # Kick
+			game.displayfile("Images/ascii_kick.txt")
 			print("You threw a kick at "+fighter)
+			time.sleep(2)
 			return attack("me",5)
 		elif userMove=='d': # Run Attempt
 			if game.parse("Progress")==3:
@@ -187,6 +200,7 @@ def attack(whichFighter,damageRange):
 			break
 	damage = 0
 	if hitType==0:
+		game.displayfile("Images/ascii_Miss.txt")
 		if whichFighter=="me":
 			print(hilight("Whoops. Miss!",'31',1))
 		else:

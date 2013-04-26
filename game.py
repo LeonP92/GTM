@@ -9,7 +9,8 @@ listOfAtts = ("Name","Level", "Health","Money","Items","Mission","Progress", "Ex
 def greetings():
 	toReturn = 0 #return var
 	#Greeting part
-	sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=30, cols=130))
+	os.system("clear")
+	sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=45, cols=130))
 	os.system("clear")
 	for line in open("Greeting.txt", "r"): #output lines
 		sys.stdout.write(fight.hilight(line,'36',1)) #print line
@@ -110,7 +111,7 @@ def intro(file, prog):
 		print (fight.hilight("Stranger: Hey what are you trying to do??!?!?!",'31',1)) #Fight stranger
 		print("Prepare to fight the stranger!")
 		time.sleep(2)
-		fight.fight("Stranger")
+		fight.fight("stranger")
 		changeAttr(6, "2")
 	elif userChoice == 'b': #Rob Stranger
 		print("You just met the poor guy... but okay..")

@@ -8,7 +8,3 @@ Grant:
 
 	Upper case Stranger - I redid fight function to take fight(fighter,hlt1=100,hlt2=120) to elimate code, so whenvever that is called, should be fight("Stranger", OPTIONAL hlt) 
 
-Leon:
-	When testing please test steal in shop.... beating the clerk should be really fucking hard. but if you do so you get an item. Then
-	then if you run away you get no items
-
