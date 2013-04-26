@@ -1,8 +1,8 @@
-Name: Grant Hola My Cola Spence
+Name: Grant
 Level: 1
-Health: 101
-Money: 53
-Items: bow
+Health: 122
+Money: 0
+Items: bat
 Mission: 1
 Progress: 2
-Experience: 106
+Experience: 0

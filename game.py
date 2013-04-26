@@ -110,7 +110,7 @@ def intro(file, prog):
 		print (fight.hilight("Stranger: Hey what are you trying to do??!?!?!",'31',1)) #Fight stranger
 		print("Prepare to fight the stranger!")
 		time.sleep(2)
-		fight.fight("stranger")
+		fight.fight("Stranger")
 		changeAttr(6, "2")
 	elif userChoice == 'b': #Rob Stranger
 		print("You just met the poor guy... but okay..")

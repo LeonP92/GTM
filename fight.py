@@ -18,7 +18,7 @@ def fight(fighter, hp1=100, hp2=120):
 	time.sleep(4)
 	os.system("clear")
 
-	processFight(fighter,fighterHealth)
+	return processFight(fighter,fighterHealth)
 
 #Description: Function for the fight scene
 def missionfight(mission,fightNumber):
@@ -49,7 +49,7 @@ def missionfight(mission,fightNumber):
 	time.sleep(4)
 	os.system("clear")
 	# Fight and move selection
-	processFight(fighter,fighterHealth)
+	return processFight(fighter,fighterHealth)
 
 #Description: Processed the events in a fight
 def processFight(fighter, fighterHealth):
@@ -73,7 +73,7 @@ def processFight(fighter, fighterHealth):
 				break
 			print(hilight(fighter+"'s health is now "+str(fighterHealth),'34',1))
 		elif damage==-1:# User Ran from Battle!
-			return
+			return -1
 
 		time.sleep(2)
 		os.system("clear")
@@ -117,6 +117,7 @@ def processFight(fighter, fighterHealth):
 			health = int(game.parse("Level"))*50 + 100
 			game.changeAttr(2, str(health))
 			game.greetings()
+		return 0
 	time.sleep(5)
 
 #Description: Determines User move on thier input
