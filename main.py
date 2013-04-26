@@ -7,9 +7,8 @@ defchoice = ["A) Fight", "B) Rob", "C) Mission", "D) Shop", "E) Rest"]
 #Main message that includes the main while loop to run the game
 def main(): 
 	userChoice = "" #User choice variable
-	gameOn = 0 #As long as it is 0 the game will continue to run
-	gameOn = game.greetings() #Starts off th game
-	while gameOn==0:  #Main while loop
+	game.greetings() #Starts off th game
+	while 1:  #Main while loop
 		print(fight.hilight("\nWhat are you trying to do home boy??",'36',1)) 
 		userChoice = game.usermove(defchoice, 0) #Gets user choice
 		if userChoice == 'a': #Gets into a random fight 
@@ -29,7 +28,6 @@ def main():
 		elif userChoice == 'i': #Shows character info
 			game.displayfile("character.txt")
 		elif userChoice == 'q':
-			gameOn = game.initopts() #Quits out of the game changing gameOn to 1
-	print(fight.hilight("I see the hood was too much for you... Come back when you is a man enough to handle it. PEACE",'32',1))
+			game.initopts() #Quits out of the game 
 if __name__ == "__main__":
 	main()

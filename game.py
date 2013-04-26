@@ -7,7 +7,6 @@ listOfAtts = ("Name","Level", "Health","Money","Items","Mission","Progress", "Ex
 #Inputs: None
 #Outputs: Greetings
 def greetings():
-	toReturn = 0 #return var
 	#Greeting part
 	os.system("clear")
 	sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=45, cols=130))
@@ -16,11 +15,9 @@ def greetings():
 		sys.stdout.write(fight.hilight(line,'36',1)) #print line
 		time.sleep(.3)#sleep for 0.5 second
 	time.sleep(3)
-	toReturn = initopts()
-	return toReturn
+	initopts()
 #Description: Initial options allows user to choose if they would like to start a new game or continue
 def initopts():
-	toReturn = 0
 	print(fight.hilight("		Welcome to Grand Theft Manual!		", '31',1))
 	print("1) Start a new game \n2) Continue \n3) Help \n4) Quit ")
 	userinput = raw_input("Please choose one of the options by pressing 1, 2, 3, or 4...\n")
@@ -31,11 +28,11 @@ def initopts():
 	elif userinput == "3": 
 		displayhelp()
 	elif userinput == "4":
-		toReturn = 1
+		print(fight.hilight("I see the hood was too much for you... Come back when you is a man enough to handle it. PEACE",'32',1))
+		sys.exit()
 	else: 
 		print("Your input was incorrect! Please try again!")
 		initopts()
-	return toReturn
 #Description: This will allow users to create a new game, if there is already a saved game then the user can choose to overwrite the current game or continue
 def newgame():
 	os.system("clear")
