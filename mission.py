@@ -24,7 +24,7 @@ def mission(missionNum):
 		fight.missionfight(missionNum,fights)
 		fights = fights+1
 	print(fight.hilight("Voice: Oi Oi Oi, What's going on...",'31',1))
-	game.displayfile("Images/ascii_buff_guy.txt")
+	game.displayfile("Images/ascii_buff_dude.txt")
 	raw_input(fight.hilight("PREPARE FOR THE BOSS FIGHT! [Press any key to start]", '33',1))
 	fight.missionfight(missionNum+10,0)
 	#Increase mission in character file once mission is completed
