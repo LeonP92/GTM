@@ -196,7 +196,7 @@ def userFightMove(fighter):
 			game.displayfile("Images/ascii_kick.txt")
 			print("You threw a kick at "+fighter)
 			time.sleep(2)
-			return attack("me",5)
+			return attack("me",8)
 		elif userMove=='d': # Run Attempt
 			if int(game.parse("Progress"))==3:
 				print(hilight(fighter+": WHERE YOU THINK YOU'RE GOING PUNK!??!",'31',1))

@@ -1,0 +1,5 @@
+Title: text based GTA
+Contributors: awesome, pho, gcs278, martin
+Type: game
+Repo: ece2524git@ece2524.ece.vt.edu:pho/project.git
+Description: This game will be a text based spin off of the game Grand Theft Auto. The player will get to rob, fight, rest and go on missions. Completing all the missions will beat the game. Generally we want to give the player as much freedom as possible. Therefore we want to let player be able to steal items they can buy from the shop and not restrict their game play to just missions. There's no time limit on the missions or when the player has to do them. Even after completing the mission the user can go around fighting and robbing things. We will use ascii art to add some sense to the game.
