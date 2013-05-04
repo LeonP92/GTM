@@ -41,7 +41,7 @@ def rest():
 		temp = temp + 1
 		time.sleep(1) #Waits 1 second
 	print(fight.hilight("You've rested and your health has been recovered!", '32', 1))
-#Adds money tdepending on a random int
+#Adds money depending on a random int
 def addmoney(int1, int2):
 	earned = random.randrange(int1, int2)
 	money = int(game.parse("Money")) + earned #random amount of money
@@ -53,9 +53,11 @@ def incexp(int1, int2):
 	earned = random.randrange(int1, int2)
 	currentExp = int(game.parse("Experience")) + earned
 	print(fight.hilight("You gained " + str(earned) + " street cred!",'32',1))
+	# depending on what the user experience is it has a chance to level up
 	if level*500 <= currentExp:
 		level = level + 1
 		print(fight.hilight("YOU LEVELED UP IN DA HOOD! You're now level " + str(level), '32',1))
 		game.changeAttr(1, str(level)) #Increase level
+		# this is for rollover exp when the user levels
 		currentExp = currentExp - ((level-1)*500)
 	game.changeAttr(7, str(earned + currentExp)) #Change exp 

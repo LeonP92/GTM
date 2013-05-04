@@ -21,6 +21,7 @@ def mission(missionNum):
 		game.changeAttr(6, "3")
 		#fights
 		print(fight.hilight("You try to be sneaky but man you're a gangster not some ninja... get ready to fight!",'31',1))
+		#goes through the fight function when fighting in a mission
 		while fights != 2:
 			fight.missionfight(missionNum,fights)
 			fights = fights+1
@@ -40,6 +41,7 @@ def mission(missionNum):
 		print(fight.hilight("You beat the game! Feel free to go around beating up and robbing strangers though, the hood is yours!", '32',1))
 #The story end scene for missions
 def endMission(missionNum):
+	# end scene for mission 1
 	if missionNum == 1:
 		print(fight.hilight("You: TELL ME WHAT YOU KNOW!!!!", '36', 1))
 		time.sleep(1)
@@ -55,6 +57,7 @@ def endMission(missionNum):
 		time.sleep(.5)
 		os.system('clear')
 		raw_input(fight.hilight("CONGRATULATIONS MAN! YOU BEAT MISSION 1!!",'32',1) + fight.hilight(" [Press any key to continue]",'33',1))
+	# end scene for mission 2
 	elif missionNum == 2:
 		print(fight.hilight("You: You better tell me why you took me and everything you know homie... or things are about to get real!", '36',1))
 		time.sleep(1)
@@ -72,6 +75,7 @@ def endMission(missionNum):
 		time.sleep(5)
 		os.system('clear')
 		raw_input(fight.hilight("CONGRATULATIONS MAN! YOU BEAT MISSION 2!!",'32',1) + fight.hilight(" [Press any key to continue]",'33',1))
+	# end scene for mission 3
 	elif missionNum == 3:
 		print(fight.hilight("You: Nobody messes with my girl and gets away with it!", '36',1))
 		time.sleep(1)
@@ -95,6 +99,7 @@ def endMission(missionNum):
 		time.sleep(5)
 		os.system('clear')
 		raw_input(fight.hilight("CONGRATULATIONS MAN! YOU BEAT MISSION 3!!",'32',1) + fight.hilight(" [Press any key to continue]",'33',1))
+	# end scene for mission 4
 	elif missionNum == 4:
 		print(fight.hilight("Big Cat: Congrats homes... .. You're now king of these streets.. ", '31',1))
 		time.sleep(1)

@@ -1,3 +1,20 @@
+<<<<<<< HEAD
+*as you about to kill Tank Sartov*
+you:"Do you know who I am and why there this gang is trying to beat me up?"
+Tank Sartov:" HA, ofcourse I know you. You're in some deep shit man."
+you:" what do you mean? I haven't done nutin'"
+Tank Sartov: "I don't know what you did, but you ending up pissing off the wrong druglord man...
+he is the one in charge of all the drugs that are past along the streets. He owns everyone. Once you're on his radar, you're pretty good as gone. If I were you I would leave now, if that would even do you any good."
+you:"tell me where he is, so I can get shit straight with him."
+Tank Sartov:"PFHH good luck. I don't even know where he is, might as well just wait till he comes to you."
+you:"yeah... good idea."
+* have a choice leave Tank Sartov or kill him 
+----------------------Mission details--------------
+Wait till something strang happens...
+//this could be impliemnt when you do three activities or something
+* black van cuts you off and a group of five guys gets out and tie you up and places a bag over your head.
+* after awhile the van stop. You got free from your hands being tied. Now you fight the five henchman.
+=======
 *You walk around and end up seeing Sketchy Sam. He approaches you...
 Sketchy Sam: "So did you get any info from Los Rochos?"
 You:"Nah dawg, nothing important... Just that I had something they wanted.
@@ -13,3 +30,4 @@ Sketchy Sam: "HA, maybe they want your..."
 ------------------------------------------------------Mission 2-----------------------------------------------------------
 Your goal this mission is to infiltrate where you're at and find out who kidnapped you. Get ready to bust some caps
 cause this might get messy! Make sure to question their boss to get the low down.
+>>>>>>> 2a9d433db057ba44d2de57770879c48cd496ea18
