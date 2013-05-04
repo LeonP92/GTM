@@ -2,7 +2,8 @@
 #import necessary modules
 import sys, errors, time, os, fileinput, re, random, string, game, robnrest
 
-fighters = ('Louie','Bob','Darren','Big Boy Bruno','Tyrone','Pedro','Hilter','Martin','Hobo Martin','Fat Joe','Oscar','Alfonso','Swollen Lou','Butter Knife Pietro','Busted Kneecaps Fabrizio','Petty Crime Salvatore') #Fighter's names
+# Fighter's name's that are randomly selected for fights during the game
+fighters = ('Louie','Bob','Darren','Big Boy Bruno','Tyrone','Pedro','Hilter','Martin','Hobo Martin','Fat Joe','Oscar','Alfonso','Swollen Lou','Butter Knife Pietro','Busted Kneecaps Fabrizio','Petty Crime Salvatore')
 
 #Description: Function for the fight scene
 def fight(fighter, hp1=100, hp2=120):
@@ -139,7 +140,7 @@ def processFight(fighter, fighterHealth):
 		game.displayfile("Images/ascii_you_dead.txt")
 		time.sleep(2)
 		print(hilight("You lost loser...",'31',1))
-		#Calculate the amoutn of money and experience lost
+		#Calculate the amount of money and experience lost
 		moneyLost = str(int(game.parse("Money"))-int(int(game.parse("Money"))*.1))
 		expLost = str(int(game.parse("Experience")) -  int(int(game.parse("Experience"))*.2))
 		game.changeAttr(3, moneyLost)
@@ -233,18 +234,21 @@ def attack(whichFighter,damageRange):
 	damage = 0
 	if hitType==0:
 		game.displayfile("Images/ascii_Miss.txt")
+		# displays which character misses
 		if whichFighter=="me":
-			print(hilight("Whoops. Miss!",'31',1))
+			print(hilight("Whoops. Miss!",'31',1))# when you miss
 		else:
-			print(hilight("Whew! He missed!",'32',1))
+			print(hilight("Whew! He missed!",'32',1))# when the guy you're facing misses
 		return 0
+	# this tells if the hit is a normal hit
 	elif hitType==1:
 		damage = random.randrange(damageRange,damageRange+10)
 		if whichFighter=="me":
-			print(hilight("Cool, a decent Hit of "+str(damage),'33',1))
+			print(hilight("Cool, a decent Hit of "+str(damage),'33',1))# when you hit
 		else:
-			print(hilight("Ouch man, decent hit of "+str(damage),'33',1))
+			print(hilight("Ouch man, decent hit of "+str(damage),'33',1))# when the guy you're facing hits
 		return damage
+	# when the attack hs been a critical hit
 	elif hitType==2:
 		damage= random.randrange(damageRange+11,damageRange+20)
 		if whichFighter=="me":
@@ -268,6 +272,7 @@ def itemAttack(item):
 	print("Using your item!")
 	time.sleep(2)
 
+	# tells what attack you have and base on the item it does a certain damage 
 	if item=="bat":
 		return attack("me",10)
 	elif item=="knife":

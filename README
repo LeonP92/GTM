@@ -6,5 +6,9 @@ You can almost do anything you want but there are limits.
 Basic Story Line: You're a thug who got on the wrong side of some gang feud. You got hit and not knowing who attacked you, you have to go through and 
 get revenge, because you know you're a thug and thats what you do. Go through the missions to finish the game. Pick fights for experience and money. You can also rob stuff to get money and buy better items. You better get some good gear if you want to go up against the biggest boss of the biggest gangs in the city...
 
+How to play:
+First run the command ./main.py to start the game. This menu screen will pop up with different options. To select the option press the key 
+that co-response to the option then hit enter. Note when you start a mission you won't be able to heal during the mission, so be prepared before entering the mission.
+
 
 Good luck. Thug 4 Lyfe.

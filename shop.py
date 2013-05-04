@@ -23,9 +23,9 @@ def showshop(toShow):
 			elif userinput.split()[0] == 'steal': #If first word was steal... then possible = 2
 					possible = 1
 					stealing = userinput.split()[1]
-			elif userinput == "q":
+			elif userinput == "q":# to leave
 				possible = 3
-			elif userinput =="i":
+			elif userinput =="i":# to see info
 				possible = 4
 		else:
 			break;
@@ -38,6 +38,7 @@ def showshop(toShow):
 		time.sleep(2)
 		fight.fight("shop", int(game.parse("Level"))*220, int(game.parse("Level"))*250)
 		canSteal = checkItem(stealing)
+		# if you did stole something
 		if canSteal == 0:
 			print(fight.hilight("NICE WORK MAN! You just stole a "+stealing,'32',1))
 			game.changeAttr(4,stealing)
@@ -51,6 +52,7 @@ def showshop(toShow):
 		game.displayfile("character.txt")
 		showshop(1)
 	else:
+		# see if you can buy an item
 		if money >= (itemCost*300) :
 			canBuy = checkItem(userinput)
 			if canBuy == 0: # can buy
@@ -60,6 +62,7 @@ def showshop(toShow):
 			else:
 				print(fight.hilight("Man you have that item! You don't want it again!",'31',1))
 			print("Can I do anything else for ya?")
+		# if the user doesn't have enough money to buy the item
 		else:
 			print("\nHey That item costs: " + str(itemCost*300) + "!")
 			print("You don't have enough money for that punk! You trying to pull a quick one on me???? EHH???")
