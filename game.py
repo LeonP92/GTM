@@ -9,6 +9,7 @@ listOfAtts = ("Name","Level", "Health","Money","Items","Mission","Progress", "Ex
 def greetings():
 	#Greeting part
 	os.system("clear")
+	# this line is to corectly formats the display
 	sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=45, cols=130))
 	os.system("clear")
 	for line in open("Greeting.txt", "r"): #output lines
@@ -21,15 +22,20 @@ def initopts():
 	print(fight.hilight("		Welcome to Grand Theft Manual!		", '31',1))
 	print("1) Start a new game \n2) Continue \n3) Help \n4) Quit ")
 	userinput = raw_input("Please choose one of the options by pressing 1, 2, 3, or 4...\n")
+	# one starts a new game, which calls the newgame function
 	if userinput == "1": 
 		newgame()
+	# two contunues a saved game, which calls the function contunuegame
 	elif userinput == "2":
 		continuegame()
+	# This option displays the help menu incase a user is confused about the game
 	elif userinput == "3": 
 		displayhelp()
+	# option for exiting the game
 	elif userinput == "4":
 		print(fight.hilight("I see the hood was too much for you... Come back when you is a man enough to handle it. PEACE",'32',1))
 		sys.exit()
+	# error message when the fallowing option haven't been selected
 	else: 
 		print("Your input was incorrect! Please try again!")
 		initopts()
@@ -37,6 +43,7 @@ def initopts():
 def newgame():
 	os.system("clear")
 	fileExists = errors.filecheck('character.txt')
+	# checks to see if there is a existing item, if there is than it ask if the user wants to overwrite it
 	if fileExists == 0:
 		choice = raw_input(fight.hilight("A file already exists, would you like to overwrite the current game?\nPress Y for yes and anything else for no: ",'31',1)).lower()
 		if choice == "y":
@@ -49,6 +56,7 @@ def newgame():
 		else:
 			print("\n")
 			initopts()
+	# if there already not an exiting game then it will just create one
 	else:
 		file = open("character.txt", "a+")
 		intro(file, 0)
@@ -57,6 +65,7 @@ def newgame():
 def continuegame():
 	os.system("clear")
 	fileExists = errors.filecheck('character.txt')
+	# checks to se if there is already a character save in the txt file
 	if fileExists == 0:
 		print("Resuming saved game...")
 		time.sleep(1)
@@ -103,11 +112,13 @@ def intro(file, prog):
 	#Give user the choices / Action taken on choices
 	if prog == 1:
 		print("Well... What do you want to do??")
-	userChoice = usermove(["A) Fight Stranger", "B) Rob Stranger", "C) Talk to Stranger", "D) Shop", "E) Rest"],0)
+	userChoice = usermove(["A) Fight Stranger", "B) Rob Stranger", "C) Talk to Stranger", "D) Shop", "E) Rest","I) Stats"],0)
+	# fighte the stranger
 	if userChoice == 'a':
 		print (fight.hilight("Stranger: Hey what are you trying to do??!?!?!",'31',1)) #Fight stranger
 		print("Prepare to fight the stranger!")
 		time.sleep(2)
+		#send to the function to fight the stranger
 		fight.fight("stranger")
 		changeAttr(6, "2")
 	elif userChoice == 'b': #Rob Stranger
@@ -126,12 +137,15 @@ def intro(file, prog):
 		file = open("character.txt", "a+")
 		intro(file, 1)
 		file.close()
+	#option for checking out the characters stats
 	elif userChoice == 'i':
 		print(fight.hilight("Stranger: Checking yourself out?? You is a weird one aren't ya?", '32',1))
+		# opens the file to display the character stats
 		displayfile("character.txt")
 		file = open("character.txt", "a+")
 		intro(file, 1)
 		file.close()
+	# if didn't press any of the above option you just leave the stranger
 	else:
 		print(fight.hilight("Stranger: I guess you're leaving! be safe, peace out homie", '32',1))
 		print(fight.hilight("... You left the stranger\n", '33', 1))
