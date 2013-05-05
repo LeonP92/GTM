@@ -1,3 +1,4 @@
+# Authors: Leon Pham, Grant Spence, Eric Owen, Martin Anilang 
 # GAME.py file
 import sys, errors, time, os, fileinput, re, random, string,fight, shop, robnrest, mission
 

@@ -1,3 +1,4 @@
+# Authors: Leon Pham, Grant Spence, Eric Owen, Martin Anilang 
 # SHOP Implementation File
 
 import game, sys, errors, time, os, fileinput, re, random, string, fight

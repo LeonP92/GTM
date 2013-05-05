@@ -1,3 +1,4 @@
+# Authors: Leon Pham, Grant Spence, Eric Owen, Martin Anilang 
 # FIGHT Implemenation File
 #import necessary modules
 import sys, errors, time, os, fileinput, re, random, string, game, robnrest

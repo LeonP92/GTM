@@ -1,3 +1,4 @@
+# Authors: Leon Pham, Grant Spence, Eric Owen, Martin Anilang 
 # MISSION Implemenation File
 
 import sys, errors, time, os, fileinput, re, random, string, game, robnrest, fight

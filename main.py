@@ -1,3 +1,4 @@
+# Authors: Leon Pham, Grant Spence, Eric Owen, Martin Anilang 
 #!/usr/bin/env python2
 #Main file for the GTM game!
 import game, errors, time, fight, shop, robnrest, mission

@@ -1,3 +1,4 @@
+# Authors: Leon Pham, Grant Spence, Eric Owen, Martin Anilang 
 # ROBNREST Implemenation File
 
 import sys, errors, time, os, fileinput, re, random, string, game, fight
