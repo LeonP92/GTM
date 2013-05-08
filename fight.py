@@ -84,7 +84,7 @@ def missionfight(mission,fightNumber):
 		fighterHealth = int(game.parse("Level"))*random.randrange(20,100) + 150
 	print(fighter+": You'll regret messing with us!")
 	print(fighter+"'s health is "+str(fighterHealth))
-	time.sleep(4)
+	time.sleep(3)
 	os.system("clear")
 	# Fight and move selection
 	processFight(fighter,fighterHealth)
@@ -104,7 +104,7 @@ def processFight(fighter, fighterHealth):
 		# Determine my move and damage I do
 		damage = userFightMove(fighter)
 		if damage>0:
-	                time.sleep(2)
+	                time.sleep(1)
         	        os.system("clear")
 			fighterHealth=fighterHealth - damage
 			if fighterHealth<=0: # Check if this hit knocked him out
@@ -113,7 +113,7 @@ def processFight(fighter, fighterHealth):
 		elif damage==-1:# User Ran from Battle!
 			return
 
-		time.sleep(2)
+		time.sleep(1)
 		os.system("clear")
 		print(fighter+"'s Move..")
 		# Fighter's Move
@@ -124,7 +124,7 @@ def processFight(fighter, fighterHealth):
 				break # I Lost!
 		printHealth(myHealth)
 		game.changeAttr(2, str(myHealth))
-		time.sleep(4)
+		time.sleep(3)
 		os.system("clear")
 	# After Fight has finished, check for winner
 	if fighterHealth<=0:
@@ -159,7 +159,7 @@ def processFight(fighter, fighterHealth):
 			health = int(game.parse("Level"))*50 + 100
 			game.changeAttr(2, str(health))
 			game.greetings()
-	time.sleep(5)
+	time.sleep(4)
 
 #Description: Determines User move on thier input
 # Returns:	0 = A miss (No Damage)
@@ -192,22 +192,22 @@ def userFightMove(fighter):
 		elif userMove=='b': # Punch
 			game.displayfile("Images/ascii_fist.txt")
 			print("You threw a punch at "+fighter)
-			time.sleep(2)
+			time.sleep(1)
 			return attack("me",5)
 		elif userMove=='c': # Kick
 			game.displayfile("Images/ascii_kick.txt")
 			print("You threw a kick at "+fighter)
-			time.sleep(2)
+			time.sleep(1)
 			return attack("me",8)
 		elif userMove=='d': # Run Attempt
 			if int(game.parse("Progress"))==3:
 				print(hilight(fighter+": WHERE YOU THINK YOU'RE GOING PUNK!??!",'31',1))
 				print(hilight("This is a mission fight! You can't run!" ,'33',1))
-				time.sleep(2)
+				time.sleep(1)
 				return 0
 			if random.randrange(0,11)>8: # Determine Success
 				print(hilight("WHEW! You got out of this joker's way",'32',1))
-				time.sleep(5)
+				time.sleep(4)
 				os.system("clear")
 				return -1 # SUCCESS!
 			else:
