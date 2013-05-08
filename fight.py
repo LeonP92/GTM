@@ -74,7 +74,7 @@ def missionfight(mission,fightNumber):
 		elif fightNumber == 2: #Fight 3
 			print(hilight("Red Panther Punisher: Meow.",'31',1))
 			fighter = "Red Panther Punisher"
-	elif mission == 13: #Mission 4 Boss name
+	elif mission == 14: #Mission 4 Boss name
 		print(hilight("Big Cat: You think you can take me on and take your girl back?? Forget about it... that kitty kat is mine forever! We make a purrrfect pair!",'31',1))
 		fighter = "Big Cat"
 	#mission health even is boss
